@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/drawable/edit.xml" value="0.1" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/activity_main.xml" value="0.10648148148148148" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/first.xml" value="0.10648148148148148" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/login.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/sejin/Desktop/project/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sejin/Desktop/project/app/src/main/res/layout/login.xml" value="0.33" />
       </map>
