@@ -15,11 +15,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.first);
 
         Button signbt = (Button) findViewById(R.id.loginButton);
+        Button signupbt = (Button) findViewById(R.id.signButton);
+
         signbt.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SubActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        signupbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SubActivity2.class);
                 startActivity(intent);
             }
         });
