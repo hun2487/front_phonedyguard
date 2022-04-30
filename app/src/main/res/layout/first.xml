@@ -67,6 +67,17 @@
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/Nav"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit"
+            android:text="네비(임시)"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
