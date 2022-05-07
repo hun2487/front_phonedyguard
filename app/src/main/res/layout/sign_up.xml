@@ -13,7 +13,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/sign_up_back"
+            android:id="@+id/sign_up_back_btn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0"
@@ -50,12 +50,12 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/textView3"
+                    android:id="@+id/userid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:minHeight="48dp"
-                    android:text="아이디" />
+                    android:hint="아이디" />
 
                 <Button
                     android:id="@+id/id_check_button"
@@ -72,12 +72,32 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/textView4"
+                    android:id="@+id/userpassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:minHeight="48dp"
-                    android:text="비밀번호" />
+                    android:hint="비밀번호" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="25dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/protector_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="보호자" />
+                <RadioButton
+                    android:id="@+id/protege_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="피보호자" />
             </LinearLayout>
 
             <LinearLayout
@@ -87,12 +107,12 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/textView5"
+                    android:id="@+id/username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:minHeight="48dp"
-                    android:text="비밀번호 확인" />
+                    android:hint="이름 (실명 입력)" />
             </LinearLayout>
 
             <LinearLayout
@@ -102,27 +122,12 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/textView6"
+                    android:id="@+id/userphonenumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:minHeight="48dp"
-                    android:text="이름 (실명 입력)" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="25dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/textView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:minHeight="48dp"
-                    android:text="휴대전화번호 ('-'제외)" />
+                    android:hint="휴대전화번호 ('-'제외)" />
 
                 <Button
                     android:id="@+id/certification_button"
@@ -139,12 +144,12 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/textView8"
+                    android:id="@+id/checknumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:minHeight="48dp"
-                    android:text="인증번호 입력" />
+                    android:hint="인증번호 입력" />
             </LinearLayout>
 
             <LinearLayout
@@ -154,12 +159,12 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/textView9"
+                    android:id="@+id/userbirth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:minHeight="48dp"
-                    android:text="생년월일 (8자리 입력)" />
+                    android:hint="생년월일 (8자리 입력)" />
 
                 <RadioButton
                     android:id="@+id/man_radio"
@@ -177,7 +182,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/sign_up_btn"
                 android:layout_width="match_parent"
                 android:layout_height="77dp"
                 android:layout_margin="10dp"
