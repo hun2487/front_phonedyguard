@@ -26,7 +26,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SubActivity"/>
-        <activity android:name=".SubActivity2"/>
+        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".MainDisplay"/>
         <activity android:name=".Navigation"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
