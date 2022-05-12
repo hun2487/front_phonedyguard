@@ -2,12 +2,19 @@ package com.example.phonedyguard;
 
 
 
+import static android.net.wifi.p2p.WifiP2pDevice.FAILED;
+
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -20,13 +27,29 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class Navigation extends AppCompatActivity implements OnMapReadyCallback {
+import java.util.Timer;
+import java.util.TimerTask;
 
+public class Navigation extends AppCompatActivity
+        implements GoogleMap.OnMyLocationButtonClickListener,
+        GoogleMap.OnMyLocationClickListener,
+        OnMapReadyCallback
+{
+    private GpsTracker gpsTracker;
     private GoogleMap mMap;
-
+    Timer timer;
+    //시작 좌표
+    double start_latitude;
+    double start_longitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        gpsTracker = new GpsTracker(Navigation.this);
+
+        start_latitude = gpsTracker.getLatitude();
+        start_longitude = gpsTracker.getLongitude();
+
         setContentView(R.layout.navigation);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -34,33 +57,51 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback 
         mapFragment.getMapAsync(this);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     *
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.mMap = googleMap;
-        // 37.557667, 126.926546 홍대입구역
-        LatLng latLng = new LatLng(37.557667, 126.926546);
+
+        LatLng latLng = new LatLng(start_latitude, start_longitude);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("홍대입구역");
-        googleMap.addMarker(markerOptions);
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             googleMap.setMyLocationEnabled(true);
         } else {
             checkLocationPermissionWithRationale();
         }
+        Log.d("@@@", " lat : " + Double.toString(start_latitude) +  " log" + Double.toString(start_longitude));
+        Start_Period();
+        mMap.setMyLocationEnabled(true);
+        mMap.setOnMyLocationButtonClickListener(this);
+        mMap.setOnMyLocationClickListener(this);
     }
 
+    public void Start_Period() {
+        timer = new Timer();
+        //timer.schedule(adTast , 5000);  // 5초후 실행하고 종료
+        //timer.schedule(adTast, 0, 300000); // 0초후 첫실행, 3초마다 계속실행
+        timer.schedule(addTask, 0, 5000); //// 0초후 첫실행, Interval분마다 계속실행
+    }
+
+    public void Stop_Period() {
+        //Timer 작업 종료
+        if(timer != null) timer.cancel();
+    }
+
+
+    private Handler handler;
+    TimerTask addTask = new TimerTask() {
+       @Override
+        public void run() {
+            //주기적으로 실행할 작업 추가
+            start_latitude = gpsTracker.getLatitude();
+            start_longitude = gpsTracker.getLongitude();
+            //Toast.makeText(Navigation.this, "permission denied", Toast.LENGTH_LONG).show();
+            Log.d("@@@", " 2lat : " + Double.toString(start_latitude) +  " log" + Double.toString(start_longitude));
+        }
+    };
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
@@ -97,5 +138,22 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback 
                 return;
             }
         }
+    }
+
+    @Override
+    public boolean onMyLocationButtonClick() {
+        gpsTracker = new GpsTracker(Navigation.this);
+
+        double latitude = gpsTracker.getLatitude();
+        double longitude = gpsTracker.getLongitude();
+
+        Toast.makeText(Navigation.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
+
+        return false;
+    }
+
+    @Override
+    public void onMyLocationClick(@NonNull Location location) {
+        Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG);
     }
 }
