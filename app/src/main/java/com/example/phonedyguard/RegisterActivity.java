@@ -2,8 +2,12 @@ package com.example.phonedyguard;
 
 /* 회원가입 처리 */
 
+import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,9 +31,8 @@ import org.json.JSONObject;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText userid, userpassword, userpwck, username, userphonenumber, userbirth;
-    private Button sign_up_btn, id_check_btn;
+    private Button sign_up_btn, id_check_btn, sign_up_back_btn, certification_btn,certification_check_btn;
     private RadioButton radio_protector, radio_protege, radio_man, radio_woman;
-    //private RadioGroup user_rg_role, user_rg_sex;
     private AlertDialog dialog;
     private boolean validate = false;
 
@@ -64,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up); // 회원가입 화면
 
-        // 아이디값 찾아주기 (editText)
+        // 아이디 지정 (editText)
         userid = findViewById(R.id.userid);
         userpassword = findViewById(R.id.userpassword);
         username = findViewById(R.id.username);
@@ -72,11 +77,17 @@ public class RegisterActivity extends AppCompatActivity {
         userbirth = findViewById(R.id.userbirth);
         userpwck = findViewById(R.id.pwck);
 
-        // 아이디값 찾아주기 (radiogroup)
-        //user_rg_role = findViewById(R.id.protection_group);
-        //user_rg_sex = findViewById(R.id.sex_group);
+        // 뒤로가기 버튼 클릭 시
+        sign_up_back_btn = findViewById(R.id.sign_up_back_btn);
+        sign_up_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
-        // 아이디 중복 체크
+        // 아이디 중복 체크 클릭 시
         id_check_btn = findViewById(R.id.id_check_btn); // 아이디 중복 체크 버튼
         id_check_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +142,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // editText
+                // editText에 작성된 값 가져오기
                 final String check_userid = userid.getText().toString();
                 final String check_userpassword = userpassword.getText().toString();
                 final String check_userpwck = userpwck.getText().toString();

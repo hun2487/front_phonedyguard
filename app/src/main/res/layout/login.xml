@@ -100,7 +100,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/login_imageView_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

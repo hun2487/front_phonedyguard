@@ -4,7 +4,6 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,10 +11,9 @@ import java.util.Map;
 
 public class RegisterRequest extends StringRequest {
 
-    //서버 URL 설정
-    final static private String URL = "3.36.109.223:3306";
+    // 서버 URL 설정 , "http://kkh1998.dothome.co.kr/Register.php"; <- 기능확인용 개인 테스트 주소(로컬)
+    final static private String URL = "http://kkh1998.dothome.co.kr/Register.php";
     private Map<String, String> map;
-    //private Map<String, String>parameters;
 
     public RegisterRequest(String ID, String PASSWORD, String ROLE, String PHONENUMBER, String SEX, String NAME, String BIRTH, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
