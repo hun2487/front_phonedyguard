@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         Button signbt = (Button) findViewById(R.id.loginButton);
         Button signupbt = (Button) findViewById(R.id.signButton);
         Button Nav = (Button) findViewById(R.id.Nav);
+        Button board = (Button) findViewById(R.id.board);
 
         signbt.setOnClickListener(new View.OnClickListener() {
 
@@ -65,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Navigation.class);
+                startActivity(intent);
+            }
+        });
+
+        board.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
                 startActivity(intent);
             }
         });

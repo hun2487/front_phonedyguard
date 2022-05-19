@@ -45,9 +45,21 @@
         app:layout_constraintVertical_bias="1.0">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/board"
+            android:layout_width="270dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit"
+            android:text="게시판"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/loginButton"
             android:layout_width="270dp"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:background="@drawable/edit"
