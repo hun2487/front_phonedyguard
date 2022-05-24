@@ -1,40 +1,43 @@
 package com.example.phonedyguard;
 
 /* 회원가입 처리 */
-
-import android.Manifest;
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
+
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText userid, userpassword, userpwck, username, userphonenumber, userbirth;
-    private Button sign_up_btn, id_check_btn, sign_up_back_btn, certification_btn,certification_check_btn;
+    private EditText userid, userpassword, userpwck, username, userphonenumber, userbirth, certification_txt;
+    private Button sign_up_btn, id_check_btn, sign_up_back_btn, certification_btn,certification_ck_btn;
     private RadioButton radio_protector, radio_protege, radio_man, radio_woman;
     private AlertDialog dialog;
     private boolean validate = false;
+    private boolean cft_validate = false;
+
+    private Certification_interface certification_interface;
+    private String certification_num = "";
 
     // 보호자 유형 리턴 함수
     public String getRole(View view) {
@@ -64,6 +67,38 @@ public class RegisterActivity extends AppCompatActivity {
         return Sex;
     }
 
+    // Retrofit 인터페이스 구현
+    private void sendPost() {
+        // 보낼 데이터 저장
+        Certification_rtf certification_post = new Certification_rtf(certification_num ,userphonenumber.getText().toString());
+
+        Call<Certification_rtf> call = certification_interface.sendPost(certification_post);
+
+        call.enqueue(new Callback<Certification_rtf>() {
+            @Override
+            public void onResponse(Call<Certification_rtf> call, retrofit2.Response<Certification_rtf> response) {
+
+                if (response.isSuccessful() && response.body() != null) {
+                    Certification_rtf postResponse = response.body();
+
+                    String senddata = "";
+                    certification_num = postResponse.getCertificationn_rtf();
+                    senddata += postResponse.getPhone_num_rtf(); // 보낼때 2개 받을때 1개 가능 여부 check 필요
+                    userphonenumber.setText(senddata);
+                }
+                else {
+                    Log.e("통신 에러","코드번호:"+response.code()+",인터넷 연결 이상 발견");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Certification_rtf> call, Throwable t) {
+                Log.e("통신 에러","인터넷 연결 이상 발견");
+            }
+        });
+    }
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +111,43 @@ public class RegisterActivity extends AppCompatActivity {
         userphonenumber = findViewById(R.id.userphonenumber);
         userbirth = findViewById(R.id.userbirth);
         userpwck = findViewById(R.id.pwck);
+
+        certification_txt = findViewById(R.id.certification_txt);
+
+        // 본인인증 Retrofit
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://3.36.109.233:8089/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        certification_interface = retrofit.create(Certification_interface.class);
+
+        // 인증번호 요청 버튼 클릭 시
+        certification_btn = findViewById(R.id.certification_btn);
+        certification_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendPost();
+            }
+        });
+
+        // 인증번호 확인 버튼 클릭 시
+        final String cft_ck_text = certification_txt.getText().toString();
+        certification_ck_btn = findViewById(R.id.certification_ck_btn);
+        certification_ck_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(cft_ck_text.equals(certification_num)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    dialog = builder.setMessage("인증 완료").setPositiveButton("확인", null).create();
+                    dialog.show();
+                    certification_txt.setText(null);
+                    cft_validate = true; // 인증 성공
+                    certification_ck_btn.setBackgroundColor(getResources().getColor(R.color.colorGray));
+
+                }
+            }
+        });
 
         // 뒤로가기 버튼 클릭 시
         sign_up_back_btn = findViewById(R.id.sign_up_back_btn);
@@ -105,13 +177,13 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
+                    @Override // 서버 통신
                     public void onResponse(String response) {
                         try{
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
 
-                            if(success) {
+                            if(success) { // 서버 통신 성공 시
                                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                                 dialog = builder.setMessage("사용할 수 있는 아이디입니다.").setPositiveButton("확인", null).create();
                                 dialog.show();
@@ -134,7 +206,6 @@ public class RegisterActivity extends AppCompatActivity {
                 queue.add(validateRequest);
             }
         });
-
 
         // 회원가입 버튼 클릭 시 수행
         sign_up_btn = findViewById(R.id.sign_up_btn); // 회원가입
@@ -184,24 +255,31 @@ public class RegisterActivity extends AppCompatActivity {
                     dialog = builder.setMessage("성별 유형을 선택해주세요.").setNegativeButton("확인", null).create();
                     dialog.show();
                     return;
+
+                } // 인증 체크 안했을 경우
+                else if(!cft_validate) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    dialog = builder.setMessage("본인 인증을 해주세요.").setNegativeButton("확인", null).create();
+                    dialog.show();
+                    return;
                 }
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
+                    @Override // 서버 통신
                     public void onResponse(String response) {
 
                         try{
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
 
-                            // 회원가입 성공시
+
                             if(check_userpassword.equals(check_userpwck)) {
-                                if(success) {
+                                if(success) { // 서버 통신 성공 시 (= 회원가입 성공)
                                     Toast.makeText(getApplicationContext(), String.format("%s님 가입을 환영합니다.", check_userid), Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(RegisterActivity.this, MainDisplay.class);
                                     startActivity(intent);
 
-                                    // 회원가입 실패시
+
                                 } else {
                                     Toast.makeText(getApplicationContext(), "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                                     return;
@@ -226,4 +304,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
 }
