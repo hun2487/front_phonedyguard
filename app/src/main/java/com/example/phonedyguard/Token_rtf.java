@@ -15,7 +15,7 @@ public class Token_rtf {
     @SerializedName("userPassword")
     private String userPassword;
 
-    private Date ExpireDatetime;
+
 
     public Token_rtf(String Token, String userID, String userPassword) {
         this.Token = Token;
@@ -28,8 +28,6 @@ public class Token_rtf {
     public String getUserID() { return userID; }
 
     public String getUserPassword() { return userPassword; }
-
-    public Date getExpireDatetime() { return ExpireDatetime; }
 
     public void setToken() { this.Token = Token; }
 

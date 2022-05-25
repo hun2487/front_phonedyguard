@@ -16,7 +16,8 @@ public interface Token_interface {
     @POST("/auth/token")
     Call<Map<String, String>> sendPost(@Header("Authorization") String token, @Field("userID") String userID, @Field("userPassword") String userPassword);
 
+    /*
     @FormUrlEncoded
     @PATCH("/auth/token")
-    Call<Map<String,String>> refreshToken(@Field("refresh_token") String refreshToken);
+    Call<Map<String,String>> refreshToken(@Field("refresh_token") String refreshToken); */
 }

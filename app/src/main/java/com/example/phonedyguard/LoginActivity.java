@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.google.firebase.firestore.auth.User;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.Map;
 
 import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private Token_interface token_interface;
     private String Token = "";
+    private String s_Token;
 
     // Retrofit 인터페이스 구현
     private void sendPost() {
@@ -50,7 +52,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {
 
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.d("통신 성공","코드번호:" +response.code());
+                    Log.d("통신 성공","코드번호:" + response.code() + "토큰값:" + Token);
+                    s_Token = Token;
                 }
                 else {
                     Log.e("통신 에러","코드번호:"+response.code()+",인터넷 연결 이상 발견");
@@ -89,15 +92,25 @@ public class LoginActivity extends AppCompatActivity {
             public okhttp3.Response intercept(@NonNull Chain chain) throws IOException {
 
                 Request newRequest;
+
                 if(Token != null && !Token.equals("")) { // 토큰이 없는 경우
                     // Authorization 헤더에 토큰 추가
                     newRequest = chain.request().newBuilder().addHeader("Authorization", Token).build();
-                    Date expireDate;
+                    return chain.proceed(newRequest);
                 }
-
-                return null;
+                else {
+                    newRequest = chain.request();
+                    return chain.proceed(newRequest);
+                }
             }
         };
+
+        /*
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.interceptors().add(interceptor);
+        OkHttpClient client = builder.build(); */
+
+
 
 
         // 로그인 이미지 클릭시 시작
