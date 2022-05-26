@@ -42,8 +42,13 @@ public class LoginActivity extends AppCompatActivity {
     private String Token = "";
     private String s_Token;
 
+
     // Retrofit 인터페이스 구현
     private void sendPost() {
+
+        if(s_Token != null) { // 서버로 부터 받은 토큰이 있을 경우
+            Token = s_Token;
+        }
 
         Call<Map<String, String>> call = token_interface.sendPost(Token, person_id.getText().toString(), person_password.getText().toString());
 
@@ -54,6 +59,11 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     Log.d("통신 성공","코드번호:" + response.code() + "토큰값:" + Token);
                     s_Token = Token;
+                    String c_person_id = person_id.getText().toString();
+                    Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MainDisplay.class);
+                    intent.putExtra("ID",  c_person_id); // getIntenet().getStringExtra("ID") (세트)
+                    startActivity(intent);
                 }
                 else {
                     Log.e("통신 에러","코드번호:"+response.code()+",인터넷 연결 이상 발견");
@@ -65,8 +75,6 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e("통신 에러","인터넷 연결 이상 발견");
             }
         });
-
-
     }
 
     @Override
@@ -74,13 +82,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        person_id = findViewById(R.id.editTextTextPersonName);
-        person_password = findViewById(R.id.editTextTextPassword);
+        //person_id = findViewById(R.id.editTextTextPersonName);
+        //person_password = findViewById(R.id.editTextTextPassword);
         login_btn = findViewById(R.id.login_imageView_btn);
 
         // 로그인 토큰 Retrofit
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://3.36.109.233:8089/")
+                .baseUrl("http://3.36.109.233/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -95,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(Token != null && !Token.equals("")) { // 토큰이 없는 경우
                     // Authorization 헤더에 토큰 추가
-                    newRequest = chain.request().newBuilder().addHeader("Authorization", Token).build();
+                    newRequest = chain.request().newBuilder().addHeader("Authorization", s_Token).build();
                     return chain.proceed(newRequest);
                 }
                 else {
@@ -118,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final String userid = person_id.getText().toString();
-                String userpassword = person_password.getText().toString();
+                final String userpassword = person_password.getText().toString();
 
                 // Token + id + password 통신
                 sendPost();

@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Certification_rtf {
 
-    @SerializedName("testStr")
+    @SerializedName("title")
     private String Certification_num_rtf;
-    @SerializedName("testStr2")
+    @SerializedName("contents")
     private String Phone_num_rtf;
 
     public Certification_rtf(String Certification_num_rtf, String Phone_num_rtf) {

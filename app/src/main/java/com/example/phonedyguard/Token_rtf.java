@@ -15,8 +15,6 @@ public class Token_rtf {
     @SerializedName("userPassword")
     private String userPassword;
 
-
-
     public Token_rtf(String Token, String userID, String userPassword) {
         this.Token = Token;
         this.userID = userID;
