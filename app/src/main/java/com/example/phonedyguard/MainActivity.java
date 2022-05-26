@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.phonedyguard.map.Navigation;
+
 import java.security.MessageDigest;
 
 public class MainActivity extends AppCompatActivity {

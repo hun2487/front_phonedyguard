@@ -31,7 +31,7 @@
         <activity android:name=".BoardList"/>
         <activity android:name=".BoardActivity"/>
         <activity android:name=".BoardRegister"/>
-        <activity android:name=".Navigation"/>
+        <activity android:name=".map.Navigation"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDuVM6Mt4MOvXCg4oaCKXt-PFFAB5_rVq8" />

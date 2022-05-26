@@ -1,8 +1,6 @@
-package com.example.phonedyguard;
+package com.example.phonedyguard.map;
 
 
-
-import static android.net.wifi.p2p.WifiP2pDevice.FAILED;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -10,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -20,12 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.phonedyguard.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Timer;
 import java.util.TimerTask;

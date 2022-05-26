@@ -1,4 +1,4 @@
-package com.example.phonedyguard;
+package com.example.phonedyguard.map;
 
 import android.Manifest;
 import android.app.Service;
