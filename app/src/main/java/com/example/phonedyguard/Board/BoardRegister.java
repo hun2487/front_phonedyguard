@@ -1,4 +1,4 @@
-package com.example.phonedyguard;
+package com.example.phonedyguard.Board;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.phonedyguard.R;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,7 +44,9 @@ public class BoardRegister extends AppCompatActivity {
 
         boardwt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { createPost(); }
+            public void onClick(View view) {
+                createPost();
+            }
         });
     }
 

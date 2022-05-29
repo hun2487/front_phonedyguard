@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.phonedyguard.map.Navigation;
+import com.example.phonedyguard.Board.BoardActivity;
 
 import java.security.MessageDigest;
 

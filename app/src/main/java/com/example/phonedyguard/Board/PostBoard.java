@@ -1,15 +1,15 @@
-package com.example.phonedyguard;
+package com.example.phonedyguard.Board;
 
 import com.google.gson.annotations.SerializedName;
 
-public class getBoard {
+public class PostBoard {
 
-    @SerializedName("testStr") //서버 변수
+    @SerializedName("title") //서버 변수
     private String Title; //클라이언트 변수
-    @SerializedName("testStr2")
+    @SerializedName("content")
     private String Content;
 
-    public getBoard(String Title, String Content)
+    public PostBoard(String Title, String Content)
     {
         this.Title = Title;
         this.Content = Content;
@@ -20,5 +20,4 @@ public class getBoard {
     public String getContent() {
         return Content;
     }
-
 }

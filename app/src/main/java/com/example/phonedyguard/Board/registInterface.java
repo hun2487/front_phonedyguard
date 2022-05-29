@@ -1,4 +1,4 @@
-package com.example.phonedyguard;
+package com.example.phonedyguard.Board;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

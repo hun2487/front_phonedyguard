@@ -28,9 +28,9 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".MainDisplay"/>
-        <activity android:name=".BoardList"/>
-        <activity android:name=".BoardActivity"/>
-        <activity android:name=".BoardRegister"/>
+        <activity android:name=".Board.Boardselect"/>
+        <activity android:name=".Board.BoardActivity"/>
+        <activity android:name=".Board.BoardRegister"/>
         <activity android:name=".map.Navigation"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
