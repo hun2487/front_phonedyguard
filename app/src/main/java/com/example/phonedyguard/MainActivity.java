@@ -14,6 +14,8 @@ import android.widget.Button;
 
 import com.example.phonedyguard.map.Navigation;
 import com.example.phonedyguard.Board.BoardActivity;
+import com.example.phonedyguard.sign_in.LoginActivity;
+import com.example.phonedyguard.sign_up.RegisterActivity;
 
 import java.security.MessageDigest;
 

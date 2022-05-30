@@ -1,4 +1,4 @@
-package com.example.phonedyguard;
+package com.example.phonedyguard.sign_up;
 
 import com.google.gson.annotations.SerializedName;
 
