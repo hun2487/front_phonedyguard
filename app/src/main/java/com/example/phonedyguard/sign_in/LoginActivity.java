@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private String Token = "";
     private String refreshToken = "";
 
-
+/*
     // Retrofit 인터페이스 구현
     private void tokenPost(Token_rtf data) {
 
@@ -111,4 +111,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+ */
 }
