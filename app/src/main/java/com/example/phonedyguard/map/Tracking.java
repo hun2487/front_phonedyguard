@@ -25,7 +25,6 @@ public class Tracking extends AppCompatActivity
         implements OnMapReadyCallback
         {
             Timer timer;
-            map_timetask addTask;
             GoogleMap map = null;
 
             @Override
@@ -41,19 +40,9 @@ public class Tracking extends AppCompatActivity
 
             }
 
-            private Handler handler;
-
-
-            public void Start_Period() {
-                timer = new Timer();
-                //timer.schedule(adTast , 5000);  // 5초후 실행하고 종료
-                //timer.schedule(adTast, 0, 300000); // 0초후 첫실행, 3초마다 계속실행
-                timer.schedule(addTask, 0, 5000); //// 0초후 첫실행, Interval분마다 계속실행
-            }
-
             @Override
             public void onMapReady(@NonNull GoogleMap googleMap) {
-                addTask = new map_timetask(googleMap);
+
                 mapThread thread = new mapThread(googleMap);
                 thread.start();
                 //Start_Period();
