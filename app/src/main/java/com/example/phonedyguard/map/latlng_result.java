@@ -4,22 +4,22 @@ import com.google.gson.annotations.SerializedName;
 
 public class latlng_result {
 
-    @SerializedName("lat")
-    private double lat;
-    @SerializedName("lng")
-    private double lng;
+    @SerializedName("latitude")
+    private double latitude;
+    @SerializedName("longitude")
+    private double longitude;
 
-    public latlng_result(double LAT, double LAN)
+    public latlng_result(double latitude, double longitude)
     {
-        this.lat = LAT;
-        this.lng = LAN;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public double getLat() {
-        return lat;
+        return latitude;
     }
 
     public double getLng() {
-        return lng;
+        return longitude;
     }
 }

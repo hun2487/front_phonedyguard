@@ -41,9 +41,11 @@
         <activity android:name=".Board.BoardActivity"/>
         <activity android:name=".Board.BoardRegister"/>
         <activity android:name=".map.Navigation"/>
+        <activity android:name=".map.Tracking" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDuVM6Mt4MOvXCg4oaCKXt-PFFAB5_rVq8" />
+            android:value="AIzaSyDSP1iUREmt5e35ji5M5n8s-TtGNWJomNo" />
 
         <service
             android:name=".FCM.MyFirebaseMessagingService"

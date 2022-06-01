@@ -4,11 +4,14 @@ package com.example.phonedyguard.map;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,7 +20,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.phonedyguard.Board.BoardActivity;
+import com.example.phonedyguard.Board.PostBoard;
+import com.example.phonedyguard.Board.listInterface;
+import com.example.phonedyguard.Board.registInterface;
 import com.example.phonedyguard.R;
+import com.example.phonedyguard.sign_up.RegisterActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -27,6 +35,12 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class Navigation extends AppCompatActivity
         implements GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
@@ -34,6 +48,9 @@ public class Navigation extends AppCompatActivity
 {
     private GpsTracker gpsTracker;
     private GoogleMap mMap;
+    private final String BASEURL = "http://3.36.109.233/"; //url
+    private map_restful MapRestful;
+
     Timer timer;
     //시작 좌표
     double start_latitude;
@@ -52,6 +69,66 @@ public class Navigation extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //------------------------run
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASEURL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        MapRestful = retrofit.create(map_restful.class);
+
+
+
+
+        //----여기서부터 임시
+        Button tracking = (Button) findViewById(R.id.tracking);
+
+        tracking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Stop_Period();
+                Intent intent = new Intent(getApplicationContext(), Tracking.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+
+    private void createPost() {
+
+
+
+        latlng_result latlngResult = new latlng_result(gpsTracker.getLatitude(), gpsTracker.getLongitude());
+
+
+        Call<latlng_result> call = MapRestful.createPost(latlngResult);
+
+        call.enqueue(new Callback<latlng_result>() {
+            @Override
+            public void onResponse(Call<latlng_result> call, Response<latlng_result> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("@@@: ", String.valueOf(response.code()));
+                    Log.d("@@@", "실패 lat : " + Double.toString(latlngResult.getLat()) +  " lng" + Double.toString(latlngResult.getLng()));
+                    return;
+                }
+
+            latlng_result postResponse = response.body();
+
+
+                latlng_result latlngResponse = response.body(); //post로 값 받아옴
+
+                latlngResponse.getLat();
+                latlngResponse.getLng();
+
+                Log.d("@@@", " 성공 lattsese : " + Double.toString(latlngResult.getLat()) +  " lng" + Double.toString(latlngResult.getLng()));
+            }
+
+                @Override
+                public void onFailure(Call<latlng_result> call, Throwable t) {
+                    Log.d("msg", t.getMessage()); //서버 통신 실패시
+                }
+            });
     }
 
 
@@ -68,7 +145,6 @@ public class Navigation extends AppCompatActivity
         } else {
             checkLocationPermissionWithRationale();
         }
-        Log.d("@@@", " lat : " + Double.toString(start_latitude) +  " log" + Double.toString(start_longitude));
         Start_Period();
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);
@@ -93,10 +169,10 @@ public class Navigation extends AppCompatActivity
        @Override
         public void run() {
             //주기적으로 실행할 작업 추가
-            start_latitude = gpsTracker.getLatitude();
-            start_longitude = gpsTracker.getLongitude();
-            //Toast.makeText(Navigation.this, "permission denied", Toast.LENGTH_LONG).show();
-            Log.d("@@@", " 2lat : " + Double.toString(start_latitude) +  " log" + Double.toString(start_longitude));
+
+           createPost();
+
+
         }
     };
 
