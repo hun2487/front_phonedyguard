@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private RetrofitClient retrofitClient;
     private Token_interface token_interface;
-<<<<<<< HEAD
     private String Token = "";
     private String refreshToken = "";
 
@@ -76,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
 //            }
 //        });
 //    }
-=======
 
     private SharedPreferences preferences;
     String getToken;
@@ -85,7 +83,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText person_id , person_password;
     private ImageView login_btn;
->>>>>>> main
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -188,7 +185,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
 
-<<<<<<< HEAD
         // 로그인 이미지 클릭시 시작
 //        login_btn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -196,7 +192,6 @@ public class LoginActivity extends AppCompatActivity {
 //                tokenPost(new Token_rtf(person_id.getText().toString(), person_password.getText().toString()));
 //            }
 //        });
-=======
             // 통신 실패
             @Override
             public void onFailure(Call<Token_Response> call, Throwable t) {
@@ -208,7 +203,6 @@ public class LoginActivity extends AppCompatActivity {
                         .show();
             }
         });
->>>>>>> main
     }
 
     //키보드 숨기기
