@@ -3,6 +3,7 @@ package com.example.phonedyguard;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -69,6 +70,12 @@ public class MainActivity extends AppCompatActivity {
 
                         // Get new FCM registration token
                         String token = task.getResult();
+
+                        // 내부 저장소에 안드로이드 기기 고유 token 저장
+                        SharedPreferences sharedPreferences_fire = getSharedPreferences("tokenDB_fire", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences_fire.edit();
+                        editor.putString("token_fire", token);
+                        editor.commit();
 
                         // Log and toast
                         String msg = "FCM registration Token: " + token;

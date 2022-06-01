@@ -41,11 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         person_password = findViewById(R.id.editTextTextPassword);
         login_btn = findViewById(R.id.login_imageView_btn);
 
-        // 내부 DB 저장 (SharedPreferences 사용, 앱 삭제 시 데이터도 삭제됨.)
-        // getSharedPreferences("파일이름", '모드') , MOODE_PRIVATE : 이 앱에서만 허용
-
-
-
         // 로그인 이미지 클릭시 시작
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("token",token); // 다음 화면으로 값 넘김
                         intent.putExtra("refreshToken",refreshToken); // 다음 화면으로 값 넘김
 
+                        // 내부저장소
                         SharedPreferences sharedPreferences = getSharedPreferences("tokenDB", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("token", token);

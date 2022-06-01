@@ -1,5 +1,6 @@
 package com.example.phonedyguard.sign_in;
 
+import com.example.phonedyguard.User.UserInfo_interface;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -8,8 +9,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     private static String baseUrl = "http://3.36.109.233/";
-    private static Token_interface token_interface;
     private static RetrofitClient instance = null;
+    private static Token_interface token_interface;
+    private static UserInfo_interface userInfo_interface;
 
     private RetrofitClient() {
         // Log Intercepter
@@ -27,6 +29,7 @@ public class RetrofitClient {
                 .build();
 
         token_interface = retrofit.create(Token_interface.class);
+        userInfo_interface = retrofit.create(UserInfo_interface.class);
     }
 
     public static RetrofitClient getInstance() {
@@ -39,4 +42,5 @@ public class RetrofitClient {
     public static Token_interface getRetrofitInterface() {
         return token_interface;
     }
+    public static UserInfo_interface getRetrofitInterface2() { return userInfo_interface; }
 }
