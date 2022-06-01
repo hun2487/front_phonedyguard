@@ -122,11 +122,10 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<Certification_Response> call, Response<Certification_Response> response) {
-
+                Certification_Response result = response.body();
 
                 if (response.isSuccessful() && response.body() != null) {
 
-                    Certification_Response result = response.body();
                     Toast.makeText(getApplicationContext(), "인증번호가 발송되었습니다.", Toast.LENGTH_SHORT).show();
                     certification_num = result.getSMS(); // 서버로부터 받은 인증번호
                     Log.d("통신 성공","코드번호:"+ response.code());

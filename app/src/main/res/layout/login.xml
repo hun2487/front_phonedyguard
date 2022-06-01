@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/main_icon" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -49,6 +50,7 @@
                 app:srcCompat="@drawable/icon_user"
                 android:contentDescription="TODO" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -62,11 +64,13 @@
                 android:inputType="textPersonName"
                 android:minHeight="48dp" />
         </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="105dp"
             android:layout_height="60dp"
@@ -79,6 +83,7 @@
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/icon_password"
                 android:contentDescription="TODO" />
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,8 +96,10 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPassword" />
+
         </LinearLayout>
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"

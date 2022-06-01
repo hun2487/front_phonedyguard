@@ -3,45 +3,36 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/hun24/Desktop/capston backup/front_phonedyguard/app/src/main/res/layout/login.xml" value="0.1644021739130435" />
+        <entry key="..\:/Users/hun24/Desktop/capston backup/front_phonedyguard/app/src/main/res/layout/notification.xml" value="0.13125" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/drawable/edit.xml" value="0.1" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/activity_main.xml" value="0.10648148148148148" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/board.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/board_list.xml" value="0.1125" />
-        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/board_select.xml" value="0.1" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/board_select.xml" value="0.2" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/board_write.xml" value="0.176" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/first.xml" value="0.1" />
-        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/login.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/login.xml" value="0.1" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/maindisplay.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/menu.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/navigation.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/notification.xml" value="0.11979166666666667" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/sign_up.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/view_board.xml" value="0.2" />
-        <entry key="..\:/Users/jin/GitHub/front_phonedyguard/app/src/main/res/layout/activity_main.xml" value="0.18072916666666666" />
-        <entry key="..\:/Users/jin/GitHub/front_phonedyguard/app/src/main/res/layout/first.xml" value="0.18072916666666666" />
-        <entry key="..\:/Users/jin/GitHub/front_phonedyguard/app/src/main/res/layout/maindisplay.xml" value="0.18072916666666666" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/first.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/login.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/navigation.xml" value="0.1" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/sign_up.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/xml/network_security_config.xml" value="0.33" />
-        <entry key="..\:/Users/sejin/Desktop/phone/front_phonedyguard/app/src/main/res/layout/activity_main.xml" value="0.1875" />
-        <entry key="..\:/Users/sejin/Desktop/phone/front_phonedyguard/app/src/main/res/layout/board_list.xml" value="0.1875" />
-        <entry key="..\:/Users/sejin/Desktop/phone/front_phonedyguard/app/src/main/res/layout/board_select.xml" value="0.1875" />
-        <entry key="..\:/Users/sejin/Desktop/phone/front_phonedyguard/app/src/main/res/layout/board_write.xml" value="0.3605072463768116" />
-        <entry key="..\:/Users/sejin/Desktop/phone/front_phonedyguard/app/src/main/res/layout/first.xml" value="0.3605072463768116" />
-        <entry key="..\:/Users/sejin/Desktop/phone/front_phonedyguard/app/src/main/res/layout/maindisplay.xml" value="0.1875" />
-        <entry key="..\:/Users/sejin/Desktop/phone/front_phonedyguard/app/src/main/res/layout/menu.xml" value="0.3605072463768116" />
-        <entry key="..\:/Users/sejin/Desktop/phone/front_phonedyguard/app/src/main/res/layout/navigation.xml" value="0.3605072463768116" />
-        <entry key="..\:/Users/sejin/Desktop/phone/front_phonedyguard/app/src/main/res/layout/sign_up.xml" value="0.1875" />
         <entry key="..\:/Users/sejin/Desktop/project/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sejin/Desktop/project/app/src/main/res/layout/login.xml" value="0.33" />
         <entry key="..\:/ad3/front_phonedyguard/app/src/main/res/layout/navigation.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

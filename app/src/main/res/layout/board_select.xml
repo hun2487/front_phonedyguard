@@ -38,12 +38,34 @@
         android:layout_weight="1"
         android:background="#eeeeee"
         android:padding="16dp" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+   >
 
     <Button
         android:id="@+id/back_button"
-        android:layout_width="151dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/edit"
         android:text="뒤로가기"
         android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/del_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit"
+        android:text="삭제"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/mod_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit"
+        android:text="수정"
+        android:textColor="#FFFFFF" />
+</LinearLayout>
 </LinearLayout>

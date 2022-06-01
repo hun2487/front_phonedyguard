@@ -19,6 +19,6 @@ public interface map_restful {
 //    @POST("/test2/")
 //    Call<result> createPost(@FieldMap Map<String, String> fields);
 
-    @POST("/maps/indices") //
+    @POST("/map/") //
     Call<latlng_result> createPost(@Body latlng_result post);
 }

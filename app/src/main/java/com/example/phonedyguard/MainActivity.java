@@ -1,5 +1,7 @@
 package com.example.phonedyguard;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +14,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.phonedyguard.map.Navigation;
 import com.example.phonedyguard.Board.BoardActivity;
@@ -19,13 +22,9 @@ import com.example.phonedyguard.sign_in.LoginActivity;
 import com.example.phonedyguard.sign_up.RegisterActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.security.MessageDigest;
-
-import static android.content.ContentValues.TAG;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,8 +50,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.first);
+        getAppKeyHash();
 
-        
+        Button signbt = (Button) findViewById(R.id.loginButton);
+        Button signupbt = (Button) findViewById(R.id.signButton);
+        Button Nav = (Button) findViewById(R.id.Nav);
+        Button board = (Button) findViewById(R.id.board);
+
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
@@ -72,14 +76,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
-        getAppKeyHash();
-
-        Button signbt = (Button) findViewById(R.id.loginButton);
-        Button signupbt = (Button) findViewById(R.id.signButton);
-        Button Nav = (Button) findViewById(R.id.Nav);
-        Button board = (Button) findViewById(R.id.board);
 
         signbt.setOnClickListener(new View.OnClickListener() {
 
@@ -113,13 +109,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
-
     }
-
-
-
-
 }

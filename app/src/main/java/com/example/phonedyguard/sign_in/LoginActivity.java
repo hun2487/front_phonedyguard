@@ -41,45 +41,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private RetrofitClient retrofitClient;
     private Token_interface token_interface;
-    private String Token = "";
-    private String refreshToken = "";
-
-
-    // Retrofit 인터페이스 구현
-//    private void tokenPost(Token_rtf data) {
-//
-//        token_interface.tokenPost(data).enqueue(new Callback<Token_Response>() {
-//            @Override
-//            public void onResponse(Call<Token_Response> call, Response<Token_Response> response) {
-//                Token_Response result = response.body();
-//
-//                if (response.isSuccessful() && response.body() != null) {
-//
-//                    Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(LoginActivity.this, MainDisplay.class);
-//                    //intent.putExtra("ID",  c_person_id); // getIntenet().getStringExtra("ID") (세트) -> id,토큰값 넘기기
-//                    startActivity(intent);
-//
-//                    Token = result.getAcessToken();
-//                }
-//                else {
-//                    Log.e("통신 에러","코드번호:"+response.code()+",인터넷 연결 이상 발견");
-//                    Toast.makeText(getApplicationContext(), "로그인 실패(1)", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Token_Response> call, Throwable t) {
-//                Log.e("통신 에러","인터넷 연결 이상 발견");
-//                Toast.makeText(getApplicationContext(), "로그인 실패(2)", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-
-    private SharedPreferences preferences;
-    String getToken;
-    String getRefreshToken;
-
 
     private EditText person_id , person_password;
     private ImageView login_btn;
@@ -95,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // 내부 DB 저장 (SharedPreferences 사용, 앱 삭제 시 데이터도 삭제됨.)
         // getSharedPreferences("파일이름", '모드') , MOODE_PRIVATE : 이 앱에서만 허용
-        preferences = getSharedPreferences("UserToken", MODE_PRIVATE);
+
 
 
         // 로그인 이미지 클릭시 시작
@@ -130,8 +91,6 @@ public class LoginActivity extends AppCompatActivity {
         retrofitClient = RetrofitClient.getInstance();
         token_interface = RetrofitClient.getRetrofitInterface();
 
-        // 내부 저장소 사용 선언
-        SharedPreferences.Editor editor = preferences.edit();
 
         token_interface.tokenPost(data).enqueue(new Callback<Token_Response>() {
             // 통신 성공
@@ -155,10 +114,6 @@ public class LoginActivity extends AppCompatActivity {
                                            + "token:" + token  + "\n" + "refreshToken:" + refreshToken + "\n"
                                            + "refreshToken_time:" + refreshToken_time);
 
-                    editor.putString("token", token);
-                    editor.putString("refrshToken", refreshToken);
-                    editor.commit();
-
                     if(stateCode == 200 && resultCode.equals("success")) {
                         String user_id = person_id.getText().toString();
                         String user_pw = person_password.getText().toString();
@@ -166,8 +121,8 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, user_id + "님 환영합니다.", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(LoginActivity.this, MainDisplay.class);
                         intent.putExtra("user_Id", user_id); // 화면이 넘어가서도 값이 유지되도록 intent와 함께 id값 넘김
-                        intent.putExtra("token",getToken);
-                        intent.putExtra("refreshToken",getRefreshToken);
+                        intent.putExtra("token",token); // 다음 화면으로 값 넘김
+                        intent.putExtra("refreshToken",refreshToken); // 다음 화면으로 값 넘김
                         startActivity(intent);
                         LoginActivity.this.finish();
                     }
@@ -185,13 +140,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
 
-        // 로그인 이미지 클릭시 시작
-//        login_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                tokenPost(new Token_rtf(person_id.getText().toString(), person_password.getText().toString()));
-//            }
-//        });
             // 통신 실패
             @Override
             public void onFailure(Call<Token_Response> call, Throwable t) {

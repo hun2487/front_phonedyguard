@@ -31,11 +31,21 @@ public class Boardselect extends AppCompatActivity {
         setContentView(R.layout.board_select);
 
         Button backbt = (Button) findViewById(R.id.back_button);
+        Button modbt = (Button) findViewById(R.id.mod_button);
+        Button delbt = (Button) findViewById(R.id.del_button);
+
+
         title_et = findViewById(R.id.title_et);
         content_et = findViewById(R.id.content_et);
 
-        backbt.setOnClickListener(new View.OnClickListener() {
+        //if (로그인 일치 구분 값)
+//        delbt.setVisibility(View.VISIBLE);
+//        modbt.setVisibility(View.VISIBLE);
+//        else
+//            delbt.setVisibility(View.INVISIBLE);
+//            modbt.setVisibility(View.INVISIBLE);
 
+        backbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
@@ -50,6 +60,8 @@ public class Boardselect extends AppCompatActivity {
 
         selectInterface = retrofit.create(selectInterface.class);
         Call <getBoard> call = selectInterface.getData(num);
+
+
 
         call.enqueue(new Callback<getBoard>()  {
             @Override
