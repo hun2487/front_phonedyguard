@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "634547351971",
+    "project_id": "spring-4f1aa",
+    "storage_bucket": "spring-4f1aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634547351971:android:1c9c3388b678064045ea16",
+        "android_client_info": {
+          "package_name": "com.example.phonedyguard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634547351971-96e3sfppr6sk0vttkturjtheva2l1ucv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq4Gq8c-vM93ACoGlHRWMNogYVBnjByG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634547351971-96e3sfppr6sk0vttkturjtheva2l1ucv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

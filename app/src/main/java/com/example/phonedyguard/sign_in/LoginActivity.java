@@ -37,35 +37,35 @@ public class LoginActivity extends AppCompatActivity {
 
 
     // Retrofit 인터페이스 구현
-    private void tokenPost(Token_rtf data) {
-
-        token_interface.tokenPost(data).enqueue(new Callback<Token_Response>() {
-            @Override
-            public void onResponse(Call<Token_Response> call, Response<Token_Response> response) {
-                Token_Response result = response.body();
-
-                if (response.isSuccessful() && response.body() != null) {
-
-                    Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, MainDisplay.class);
-                    //intent.putExtra("ID",  c_person_id); // getIntenet().getStringExtra("ID") (세트) -> id,토큰값 넘기기
-                    startActivity(intent);
-
-                    Token = result.getAcessToken();
-                }
-                else {
-                    Log.e("통신 에러","코드번호:"+response.code()+",인터넷 연결 이상 발견");
-                    Toast.makeText(getApplicationContext(), "로그인 실패(1)", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Token_Response> call, Throwable t) {
-                Log.e("통신 에러","인터넷 연결 이상 발견");
-                Toast.makeText(getApplicationContext(), "로그인 실패(2)", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    private void tokenPost(Token_rtf data) {
+//
+//        token_interface.tokenPost(data).enqueue(new Callback<Token_Response>() {
+//            @Override
+//            public void onResponse(Call<Token_Response> call, Response<Token_Response> response) {
+//                Token_Response result = response.body();
+//
+//                if (response.isSuccessful() && response.body() != null) {
+//
+//                    Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(LoginActivity.this, MainDisplay.class);
+//                    //intent.putExtra("ID",  c_person_id); // getIntenet().getStringExtra("ID") (세트) -> id,토큰값 넘기기
+//                    startActivity(intent);
+//
+//                    Token = result.getAcessToken();
+//                }
+//                else {
+//                    Log.e("통신 에러","코드번호:"+response.code()+",인터넷 연결 이상 발견");
+//                    Toast.makeText(getApplicationContext(), "로그인 실패(1)", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Token_Response> call, Throwable t) {
+//                Log.e("통신 에러","인터넷 연결 이상 발견");
+//                Toast.makeText(getApplicationContext(), "로그인 실패(2)", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,11 +104,11 @@ public class LoginActivity extends AppCompatActivity {
         };
 
         // 로그인 이미지 클릭시 시작
-        login_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                tokenPost(new Token_rtf(person_id.getText().toString(), person_password.getText().toString()));
-            }
-        });
+//        login_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                tokenPost(new Token_rtf(person_id.getText().toString(), person_password.getText().toString()));
+//            }
+//        });
     }
 }
