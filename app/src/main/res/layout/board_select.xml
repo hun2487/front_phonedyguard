@@ -24,12 +24,35 @@
             android:layout_weight="1"
             />
     </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="16dp"
+        android:layout_gravity="left"
         android:text="내용"/>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="16dp"
+            android:text="작성자" />
+        <TextView
+            android:id="@+id/id_et"
+            android:padding="10dp"
+            android:background="#eeeeee"
+            android:layout_width="14dp"
+            android:layout_height="50dp"
+            android:layout_weight="40"
+            />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/content_et"
@@ -68,4 +91,5 @@
         android:text="수정"
         android:textColor="#FFFFFF" />
 </LinearLayout>
+
 </LinearLayout>

@@ -99,7 +99,8 @@ public class BoardActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Boardselect.class);
                 startActivity(intent);
 
-                num = boardlists.get(position).getIdx(); //게시판 번호
+                num = boardlists.get(position).getNum(); //게시판 번호
+                boardlists.get(position);
             }
         });
     }

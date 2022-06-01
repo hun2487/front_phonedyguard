@@ -9,8 +9,12 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.phonedyguard.MainDisplay;
 import com.example.phonedyguard.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,6 +26,9 @@ public class BoardRegister extends AppCompatActivity {
 
     private final String BASEURL = "http://3.36.109.233/"; //url
     private EditText title_et, content_et;
+
+
+    String token = ((MainDisplay)MainDisplay.context_main).call_token;
 
     private registInterface registInterface;
 
@@ -35,9 +42,28 @@ public class BoardRegister extends AppCompatActivity {
 
         Button boardwt = (Button) findViewById(R.id.reg_button); //등록 버튼
 
+        Gson gson = new GsonBuilder().serializeNulls().create();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+       /* OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        Request originalRequest = chain.request();
+                        Request newRequest = originalRequest.newBuilder()
+                                .header("Header : ", token)
+                                .build();
+                        return chain.proceed(newRequest);
+                    }
+                })
+                .addInterceptor(loggingInterceptor)
+                .build();
+*/
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
+                //.client(okHttpClient)
                 .build();
 
         registInterface = retrofit.create(registInterface.class);
@@ -54,7 +80,7 @@ public class BoardRegister extends AppCompatActivity {
 
         PostBoard post = new PostBoard(title_et.getText().toString(), content_et.getText().toString()); //String으로 변환하여 값을 보냄.
 
-        Call<PostBoard> call = registInterface.createPost(post);
+        Call<PostBoard> call = registInterface.createPost(token,post);
 
         call.enqueue(new Callback<PostBoard>() {
             @Override
@@ -70,6 +96,7 @@ public class BoardRegister extends AppCompatActivity {
                 content += "Title: " + postResponse.getTitle() + "\n";
                 content += "Content: " + postResponse.getContent() + "\n";
 
+                //title_et.setText(token);
                 Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
                 startActivity(intent);
             }

@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,21 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.phonedyguard.MainDisplay;
 import com.example.phonedyguard.R;
 
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -123,6 +110,12 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("user_Id", user_id); // 화면이 넘어가서도 값이 유지되도록 intent와 함께 id값 넘김
                         intent.putExtra("token",token); // 다음 화면으로 값 넘김
                         intent.putExtra("refreshToken",refreshToken); // 다음 화면으로 값 넘김
+
+                        SharedPreferences sharedPreferences = getSharedPreferences("tokenDB", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("token", token);
+                        editor.commit();
+
                         startActivity(intent);
                         LoginActivity.this.finish();
                     }

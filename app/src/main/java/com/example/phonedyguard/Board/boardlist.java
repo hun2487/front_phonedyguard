@@ -2,11 +2,12 @@ package com.example.phonedyguard.Board;
 
 public class boardlist {
     private String title;
-    private long   idx;
+    //private String id;
+    private long num;
 
-    boardlist(String title, long idx){
+    boardlist(String title, long num){
         this.title = title;
-        this.idx = idx;
+        this.num = num;
     }
 
 
@@ -14,7 +15,7 @@ public class boardlist {
         return title;
     }
 
-    public long getIdx() {
-        return idx;
+    public long getNum() {
+        return num;
     }
 }

@@ -2,9 +2,6 @@ package com.example.phonedyguard;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -16,8 +13,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.phonedyguard.map.Navigation;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.phonedyguard.Board.BoardActivity;
+import com.example.phonedyguard.map.Navigation;
 import com.example.phonedyguard.sign_in.LoginActivity;
 import com.example.phonedyguard.sign_up.RegisterActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
