@@ -3,6 +3,7 @@ package com.example.phonedyguard.map;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface map_restful {
 
@@ -19,6 +20,10 @@ public interface map_restful {
 //    @POST("/test2/")
 //    Call<result> createPost(@FieldMap Map<String, String> fields);
 
-    @POST("/map/") //
+
+    @POST("/maps/indices") //
     Call<latlng_result> createPost(@Body latlng_result post);
+
+    @POST ("/maps/indices")
+    Call<latlng_result>getPostComment(@Query("postId") String postId);
 }
