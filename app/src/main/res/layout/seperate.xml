@@ -7,42 +7,27 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="174dp"
-        android:layout_height="150dp"
+        android:layout_width="158dp"
+        android:layout_height="152dp"
         android:layout_marginBottom="264dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/test_id"
-            android:layout_width="match_parent"
-            android:layout_height="119dp"
+        <Button
+            android:id="@+id/guardian"
+            android:layout_width="164dp"
+            android:layout_height="187dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="보호자" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <Button
+            android:id="@+id/ward"
+            android:layout_width="164dp"
+            android:layout_height="187dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/guardian"
-                android:layout_width="164dp"
-                android:layout_height="187dp"
-                android:layout_weight="1"
-                android:text="보호자" />
-
-            <Button
-                android:id="@+id/ward"
-                android:layout_width="164dp"
-                android:layout_height="187dp"
-                android:layout_weight="1"
-                android:text="피보호자" />
-        </LinearLayout>
-
+            android:text="피보호자" />
     </LinearLayout>
 
 

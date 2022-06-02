@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                         String user_id = person_id.getText().toString();
                         String user_pw = person_password.getText().toString();
 
-                        Toast.makeText(LoginActivity.this, user_id + "님 환영합니다.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, user_id + "님 환영합니다.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainDisplay.class);
                         intent.putExtra("user_Id", user_id); // 화면이 넘어가서도 값이 유지되도록 intent와 함께 id값 넘김
                         intent.putExtra("token",token); // 다음 화면으로 값 넘김

@@ -12,12 +12,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.phonedyguard.Board.BoardActivity;
+import com.example.phonedyguard.menu.GuardMenu;
+import com.example.phonedyguard.menu.WardMenu;
 
 public class MainDisplay extends AppCompatActivity {
 
     public static Context context_main;
     public String call_token;
-    Button guardbt;
+    Button guardbt, wardbt;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,25 +28,27 @@ public class MainDisplay extends AppCompatActivity {
 
         context_main = this;
 
-        TextView id;
-
-        id = findViewById(R.id.test_id);
         guardbt = findViewById(R.id.guardian);
+        wardbt = findViewById(R.id.ward);
 
         SharedPreferences sharedPreferences = getSharedPreferences("tokenDB", MODE_PRIVATE);
         String gettoken = sharedPreferences.getString("token","");
-        call_token = "Bearer " + gettoken;
-
-        id.setText(gettoken);
+        call_token = "Bearer " + gettoken; //토큰
 
         guardbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
+                Intent intent = new Intent(getApplicationContext(), GuardMenu.class);
                 startActivity(intent);
             }
         });
 
-
+        wardbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WardMenu.class);
+                startActivity(intent);
+            }
+        });
     }
 }

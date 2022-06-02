@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         Button signbt = (Button) findViewById(R.id.loginButton);
         Button signupbt = (Button) findViewById(R.id.signButton);
         Button Nav = (Button) findViewById(R.id.Nav);
-        Button board = (Button) findViewById(R.id.board);
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -80,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                         // Log and toast
                         String msg = "FCM registration Token: " + token;
                         Log.d(TAG, msg);
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -109,12 +107,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        board.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }

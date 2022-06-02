@@ -7,28 +7,28 @@ public class getBoard {
     @SerializedName("title") //서버 변수
     private String Title; //클라이언트 변수
     @SerializedName("number")
-    private long num;
-    @SerializedName("id")
-    private String id;
+    private long number;
+    @SerializedName("email")
+    private String email;
     @SerializedName("content")
     private String Content;
     @SerializedName("check")
     private String check;
 
-    public getBoard(String Title, long num, String Content, String check, String id)
+    public getBoard(String Title, long number, String Content, String check, String email)
     {
-        this.id = id;
+        this.email = email;
         this.check = check;
         this.Content = Content;
         this.Title = Title;
-        this.num = num;
+        this.number = number;
 
     }
-    public String getId() {return id;}
+    public String getEmail() {return email;}
     public String getCheck() { return check; }
     public String getContent() { return Content; }
     public String getTitle() {
         return Title;
     }
-    public long getNum() { return num; }
+    public long getNumber() { return number; }
 }

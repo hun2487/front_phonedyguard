@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class BoardActivity extends AppCompatActivity {
 
     public static Context context_main;
-    public long num;
+    public long number;
 
     private final String BASEURL = "http://3.36.109.233/"; //url
     private ListView boardlist;
@@ -60,14 +60,15 @@ public class BoardActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<getBoard>> call, Response<List<getBoard>> response) {
                 if (!response.isSuccessful()) {
+                    Log.d("통신 :", response.message());
                     return;
                 }
 
                 List<getBoard> posts = response.body();
 
-                //잔짜 db값과의 매핑
+                //db값과의 매핑
                 for (getBoard post : posts) {
-                    com.example.phonedyguard.Board.boardlist temp_list = new boardlist(post.getTitle(), post.getNum());
+                    com.example.phonedyguard.Board.boardlist temp_list = new boardlist(post.getTitle(), post.getNumber());
                     boardlists.add(temp_list); //ArrayList로 받은 객체 list에 삽입
                 }
 
@@ -80,7 +81,7 @@ public class BoardActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<getBoard>> call, Throwable t) {
-                Log.d("msg", t.getMessage()); //서버 통신 실패시 로그 메시지
+                Log.d("통신 실패 : ", t.getMessage()); //서버 통신 실패시 로그 메시지
             }
         });
 
@@ -99,7 +100,7 @@ public class BoardActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Boardselect.class);
                 startActivity(intent);
 
-                num = boardlists.get(position).getNum(); //게시판 번호
+                number = boardlists.get(position).getNum(); //게시판 번호
                 boardlists.get(position);
             }
         });
