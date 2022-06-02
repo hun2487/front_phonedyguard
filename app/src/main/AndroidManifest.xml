@@ -43,6 +43,7 @@
         <activity android:name=".Board.BoardRegister"/>
         <activity android:name=".Board.BoardMod"/>
         <activity android:name=".map.Navigation"/>
+        <activity android:name=".map.route_register"/>
         <activity android:name=".menu.GuardMenu"/>
         <activity android:name=".menu.WardMenu"/>
         <meta-data
