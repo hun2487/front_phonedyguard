@@ -1,6 +1,9 @@
 package com.example.phonedyguard.sign_in;
 
 import com.example.phonedyguard.User.UserInfo_interface;
+import com.example.phonedyguard.sign_up.Register_interface;
+import com.example.phonedyguard.tokenassistance.TokenAssistance_interface;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -12,6 +15,7 @@ public class RetrofitClient {
     private static RetrofitClient instance = null;
     private static Token_interface token_interface;
     private static UserInfo_interface userInfo_interface;
+    private static Register_interface register_interface;
 
     private RetrofitClient() {
         // Log Intercepter
@@ -30,6 +34,8 @@ public class RetrofitClient {
 
         token_interface = retrofit.create(Token_interface.class);
         userInfo_interface = retrofit.create(UserInfo_interface.class);
+        register_interface = retrofit.create(Register_interface.class);
+
     }
 
     public static RetrofitClient getInstance() {
@@ -39,8 +45,10 @@ public class RetrofitClient {
         return instance;
     }
 
-    public static Token_interface getRetrofitInterface() {
+    public static Token_interface getRetrofitInterface_token() {
         return token_interface;
     }
-    public static UserInfo_interface getRetrofitInterface2() { return userInfo_interface; }
+    public static UserInfo_interface getRetrofitInterface_userinfo() { return userInfo_interface; }
+    public static Register_interface getRetrofitInterface_register() { return register_interface; }
+
 }

@@ -43,7 +43,7 @@ public class UserInfo extends AppCompatActivity {
     public void startInfo() {
 
         retrofitClient = RetrofitClient.getInstance();
-        userInfo_interface = RetrofitClient.getRetrofitInterface2();
+        userInfo_interface = RetrofitClient.getRetrofitInterface_userinfo();
 
         userInfo_interface.getInfo(token).enqueue(new Callback<UserInfo_Response>() {
             @Override

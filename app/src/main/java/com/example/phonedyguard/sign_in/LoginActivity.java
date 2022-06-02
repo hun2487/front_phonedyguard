@@ -71,8 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //retrofit 생성
         retrofitClient = RetrofitClient.getInstance();
-        token_interface = RetrofitClient.getRetrofitInterface();
-
+        token_interface = RetrofitClient.getRetrofitInterface_token();
 
         token_interface.tokenPost(data).enqueue(new Callback<Token_Response>() {
             // 통신 성공
@@ -103,13 +102,15 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, user_id + "님 환영합니다.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainDisplay.class);
                         intent.putExtra("user_Id", user_id); // 화면이 넘어가서도 값이 유지되도록 intent와 함께 id값 넘김
-                        intent.putExtra("token",token); // 다음 화면으로 값 넘김
-                        intent.putExtra("refreshToken",refreshToken); // 다음 화면으로 값 넘김
+                        //intent.putExtra("token",token); // 다음 화면으로 값 넘김
+                        //intent.putExtra("refreshToken",refreshToken); // 다음 화면으로 값 넘김
 
                         // 내부저장소
                         SharedPreferences sharedPreferences = getSharedPreferences("tokenDB", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("token", token);
+                        editor.putString("refreshtoken",refreshToken);
+                        editor.putInt("refreshtoken_time", refreshToken_time);
                         editor.commit();
 
                         startActivity(intent);
