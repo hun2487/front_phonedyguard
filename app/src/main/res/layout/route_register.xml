@@ -66,19 +66,11 @@
 
 
 
-    <TextView
-        android:id="@+id/result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="1dp"
-        android:text="조회한 주소정보 출력"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webView"
+        >
+    </WebView>
 
 </LinearLayout>

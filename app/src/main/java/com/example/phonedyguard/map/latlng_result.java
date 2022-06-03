@@ -1,13 +1,19 @@
 package com.example.phonedyguard.map;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class latlng_result {
 
-    @SerializedName("lat")
+    @SerializedName("latitude")
     private double lat;
-    @SerializedName("lng")
+    @SerializedName("longitude")
     private double lng;
+
+
+
 
     public latlng_result(double LAT, double LAN)
     {

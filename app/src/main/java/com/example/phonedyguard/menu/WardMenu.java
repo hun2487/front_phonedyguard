@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.phonedyguard.Board.BoardActivity;
 import com.example.phonedyguard.R;
+import com.example.phonedyguard.map.Navigation;
 
 public class WardMenu extends AppCompatActivity {
 
@@ -34,8 +35,8 @@ public class WardMenu extends AppCompatActivity {
         see_safe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), Navigation.class);
+                startActivity(intent);
             }
         });
     }

@@ -24,7 +24,9 @@ import com.example.phonedyguard.Board.BoardActivity;
 import com.example.phonedyguard.Board.PostBoard;
 import com.example.phonedyguard.Board.listInterface;
 import com.example.phonedyguard.Board.registInterface;
+import com.example.phonedyguard.MainDisplay;
 import com.example.phonedyguard.R;
+import com.example.phonedyguard.User.UserInfo;
 import com.example.phonedyguard.sign_up.RegisterActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -50,6 +52,8 @@ public class Navigation extends AppCompatActivity
     private GoogleMap mMap;
     private final String BASEURL = "http://3.36.109.233/"; //url
     private map_restful MapRestful;
+
+    String token = ((MainDisplay)MainDisplay.context_main).call_token;
 
     Timer timer;
     //시작 좌표
@@ -77,18 +81,6 @@ public class Navigation extends AppCompatActivity
                 .build();
         MapRestful = retrofit.create(map_restful.class);
 
-        //----여기서부터 임시
-        Button tracking = (Button) findViewById(R.id.tracking);
-
-        tracking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Stop_Period();
-                Intent intent = new Intent(getApplicationContext(), Tracking.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
 
@@ -98,7 +90,7 @@ public class Navigation extends AppCompatActivity
         latlng_result latlngResult = new latlng_result(gpsTracker.getLatitude(), gpsTracker.getLongitude());
 
 
-        Call<latlng_result> call = MapRestful.createPost(latlngResult);
+        Call<latlng_result> call = MapRestful.createPost(token,latlngResult);
 
         call.enqueue(new Callback<latlng_result>() {
             @Override
@@ -108,9 +100,6 @@ public class Navigation extends AppCompatActivity
                     Log.d("@@@", "실패 lat : " + Double.toString(latlngResult.getLat()) +  " lng" + Double.toString(latlngResult.getLng()));
                     return;
                 }
-
-                latlng_result postResponse = response.body();
-
 
                 latlng_result latlngResponse = response.body(); //post로 값 받아옴
 
@@ -165,10 +154,7 @@ public class Navigation extends AppCompatActivity
         @Override
         public void run() {
             //주기적으로 실행할 작업 추가
-
             createPost();
-
-
         }
     };
 

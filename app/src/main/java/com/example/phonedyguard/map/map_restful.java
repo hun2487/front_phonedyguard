@@ -1,29 +1,21 @@
 package com.example.phonedyguard.map;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface map_restful {
 
-/*
-    @FormUrlEncoded
-    @POST("Posts")
-    Call<result> createPost(
-            @Field("title") int title,
-            @Field("content") String content
-    );*/
-//
-//    @Headers("Content-Type: application/json")
-//    @FormUrlEncoded
-//    @POST("/test2/")
-//    Call<result> createPost(@FieldMap Map<String, String> fields);
+    @POST("/maps/indices/") //
+    Call<latlng_result> createPost(@Header("Authorization") String token, @Body latlng_result post);
 
+    @POST ("/maps/routes")
+    Call<route> postSafeLatlng(@Header("Authorization") String token, @Body ArrayList<LatLng> post);
 
-    @POST("/maps/indices") //
-    Call<latlng_result> createPost(@Body latlng_result post);
-
-    @POST ("/maps/indices")
-    Call<latlng_result>getPostComment(@Query("postId") String postId);
 }

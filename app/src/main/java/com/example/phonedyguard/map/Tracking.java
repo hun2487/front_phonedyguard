@@ -17,15 +17,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
 import java.util.Timer;
-import java.util.TimerTask;
+
 
 public class Tracking extends AppCompatActivity
         implements OnMapReadyCallback
         {
-            Timer timer;
-            GoogleMap map = null;
 
             @Override
             protected void onCreate(Bundle savedInstanceState) {

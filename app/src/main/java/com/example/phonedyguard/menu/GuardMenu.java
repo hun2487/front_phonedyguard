@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.phonedyguard.Board.BoardActivity;
+import com.example.phonedyguard.map.route_register;
+import com.example.phonedyguard.map.Tracking;
 import com.example.phonedyguard.R;
 
 public class GuardMenu extends AppCompatActivity {
@@ -35,16 +37,16 @@ public class GuardMenu extends AppCompatActivity {
         set_safe.setOnClickListener(new View.OnClickListener() {  //안심경로 설정
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(getApplicationContext(), GuardMenu.class);
-               // startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), route_register.class);
+               startActivity(intent);
             }
         });
 
         see_safe.setOnClickListener(new View.OnClickListener() {  //안심경로 확인
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(getApplicationContext(), GuardMenu.class);
-                // startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), Tracking.class);
+                startActivity(intent);
             }
         });
         }
