@@ -16,17 +16,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.phonedyguard.MainActivity;
-import com.example.phonedyguard.MainDisplay;
 import com.example.phonedyguard.R;
 import com.example.phonedyguard.sign_in.LoginActivity;
-import com.example.phonedyguard.sign_in.RetrofitClient;
-import com.example.phonedyguard.sign_in.Token_interface;
+import com.example.phonedyguard.Util.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -35,7 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
     private RadioButton  radio_man, radio_woman;
     private AlertDialog dialog;
 
-    private RetrofitClient retrofitClient;
     private Register_interface register_interface;
 
     // 성별 리턴 함수
@@ -55,10 +50,10 @@ public class RegisterActivity extends AppCompatActivity {
     // register Retrofit
     private void registerPost(Register_rtf data) {
 
-        retrofitClient = RetrofitClient.getInstance();
-        register_interface = RetrofitClient.getRetrofitInterface_register();
+        register_interface = RetrofitClient.LoginRetrofitClient().create(Register_interface.class);
 
-        register_interface.registerPost(data).enqueue(new Callback<Register_Response>() {
+        Call<Register_Response> call = register_interface.registerPost(data);
+        call.enqueue(new Callback<Register_Response>() {
             @Override
             public void onResponse(Call<Register_Response> call, Response<Register_Response> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -78,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "가입 실패", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "중복된 ID 입니다.", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override

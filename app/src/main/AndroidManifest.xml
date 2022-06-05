@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name=".Util.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -47,6 +48,7 @@
         <activity android:name=".map.route_register"/>
         <activity android:name=".menu.GuardMenu"/>
         <activity android:name=".menu.WardMenu"/>
+        <activity android:name=".User.UserInfo"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDuVM6Mt4MOvXCg4oaCKXt-PFFAB5_rVq8" />

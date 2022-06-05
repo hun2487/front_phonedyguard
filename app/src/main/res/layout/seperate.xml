@@ -16,6 +16,12 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
+            android:id="@+id/userinfo"
+            android:layout_width="106dp"
+            android:layout_height="wrap_content"
+            android:text="개인정보" />
+
+        <Button
             android:id="@+id/guardian"
             android:layout_width="164dp"
             android:layout_height="187dp"

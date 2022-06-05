@@ -1,11 +1,12 @@
-package com.example.phonedyguard.User;
+package com.example.phonedyguard.sign_in;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class UserInfo_Response {
+/* 받을 데이터  (토큰) */
+public class Login_Response {
 
     @SerializedName("state")
     @Expose // object 중 해당 값이 null일 경우, json으로 만들 필드를 자동 생략해 준다.
@@ -18,7 +19,7 @@ public class UserInfo_Response {
     private String massage;
     @SerializedName("data")
     @Expose
-    private UserData data;
+    private Data data;
     @SerializedName("error")
     @Expose
     private List<Object> error = null;
@@ -47,11 +48,11 @@ public class UserInfo_Response {
         this.massage = massage;
     }
 
-    public UserData getData() {
+    public Data getData() {
         return data;
     }
 
-    public void setData(UserData data) {
+    public void setData(Data data) {
         this.data = data;
     }
 

@@ -1,12 +1,12 @@
-package com.example.phonedyguard.sign_in;
+package com.example.phonedyguard.Util;
 
+import com.example.phonedyguard.sign_in.Data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/* 받을 데이터  (토큰) */
-public class Token_Response {
+public class AuthToken_Response {
 
     @SerializedName("state")
     @Expose // object 중 해당 값이 null일 경우, json으로 만들 필드를 자동 생략해 준다.
