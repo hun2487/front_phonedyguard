@@ -7,6 +7,7 @@ public class Utils {
     private static final String PREFS = "prefs";
     private static final String Access_Token = "Access_Token";
     private static final String Refresh_Token = "Refresh_Token";
+    private static final String User_ID = "User_ID";
     private Context mContext;
     private static SharedPreferences prefs;
     private static SharedPreferences.Editor prefsEditor;
@@ -22,6 +23,14 @@ public class Utils {
         mContext = context;
         prefs = mContext.getSharedPreferences(PREFS,Context.MODE_PRIVATE);
         prefsEditor = prefs.edit();
+    }
+
+    public static String getUser_ID(String defValue) {
+        return prefs.getString(User_ID, defValue);
+    }
+
+    public static void setUser_ID(String value) {
+        prefsEditor.putString(User_ID, value).commit();
     }
 
     public static void setAccessToken(String value) {

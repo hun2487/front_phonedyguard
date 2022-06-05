@@ -35,7 +35,7 @@ public class MainDisplay extends AppCompatActivity {
     public static Context context_main;
     public String call_token, call_refreshtoken, origin_token;
     Button guardbt, wardbt;
-    Button userinfo, out; // 유저 정보 확인 테스트용 (나중에 다른곳에 연결)
+    Button userinfo, out; // 유저 정보 확인 테스트용
 
     private Logout_interface Logout_interface;
 

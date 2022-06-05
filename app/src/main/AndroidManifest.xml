@@ -49,7 +49,8 @@
         <activity android:name=".menu.GuardMenu"/>
         <activity android:name=".menu.WardMenu"/>
         <activity android:name=".User.UserInfo"/>
-        <activity android:name=".sign_out.Logout"/>
+        <activity android:name=".User.UserUpdate"/>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDuVM6Mt4MOvXCg4oaCKXt-PFFAB5_rVq8" />

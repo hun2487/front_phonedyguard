@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +30,8 @@ public class UserInfo extends AppCompatActivity {
 
     private UserInfo_interface userInfo_interface;
     private TextView user_id, user_name, user_sex, user_phone;
-    private Button userinfo_back_btn, update_btn;
+    private Button userinfo_back_btn, reset_btn, go_update_btn;
+
 
     private String getEmail;
     private String getName;
@@ -59,11 +61,21 @@ public class UserInfo extends AppCompatActivity {
         });
 
         // 새로고침 버튼
-        update_btn = findViewById(R.id.update_btn);
-        update_btn.setOnClickListener(new View.OnClickListener() {
+        reset_btn = findViewById(R.id.reset_btn);
+        reset_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startInfo();
+            }
+        });
+
+        // 정보수정 버튼
+        go_update_btn = findViewById(R.id.go_updateInfo);
+        go_update_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserInfo.this, UserUpdate.class);
+                startActivity(intent);
             }
         });
     }

@@ -101,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="이름 (실명 입력)"
+                    android:hint="이름"
                     android:minHeight="48dp" />
             </LinearLayout>
 

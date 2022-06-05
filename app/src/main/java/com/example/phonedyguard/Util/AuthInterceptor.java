@@ -19,7 +19,9 @@ public class AuthInterceptor implements Interceptor {
 
         AuthToken_interface authToken_interface = RetrofitClient.RetrofitClient().create(AuthToken_interface.class);
 
+        //내부 저장소를 사용하기위한 전역 Context를 가져옴
         Utils.init(MyApp.getContext());
+
         String at = Utils.getAccessToken("");
         String rt = Utils.getRefreshToken("");
 

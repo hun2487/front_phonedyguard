@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         person_password = findViewById(R.id.editTextTextPassword);
         login_btn = findViewById(R.id.login_imageView_btn);
 
+        //내부 저장소를 사용하기위한 전역 Context를 가져옴
         Utils.init(getApplicationContext());
 
         // 안드로이드 고유 기기 토큰 값
@@ -107,7 +108,9 @@ public class LoginActivity extends AppCompatActivity {
 
                         Toast.makeText(LoginActivity.this, user_id + "님 환영합니다.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainDisplay.class);
-                        //intent.putExtra("user_Id", user_id); // 화면이 넘어가서도 값이 유지되도록 intent와 함께 id값 넘김
+
+                        // 내부 저장소에 로그인한 id값 저장
+                        Utils.setUser_ID(user_id);
 
                         // 내부 저장소에 가져온 토근값 저장
                         Utils.setAccessToken(token);
