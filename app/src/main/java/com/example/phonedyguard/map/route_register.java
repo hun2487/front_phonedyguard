@@ -21,7 +21,10 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,11 +34,40 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class route_register extends AppCompatActivity {
 
-    List<LatLng> result = new ArrayList<>();
+    List<routes> result = new ArrayList<>();
     private map_restful MapRestful;
     private final String BASEURL = "http://3.36.109.233/"; //url
     String token = ((MainDisplay)MainDisplay.context_main).call_token;
+    int test = 3;
+    boolean flag = false;
+    private Timer timer;
 
+
+
+    public void Start_Period() {
+        timer = new Timer();
+        //timer.schedule(adTast , 5000);  // 5초후 실행하고 종료
+        //timer.schedule(adTast, 0, 300000); // 0초후 첫실행, 3초마다 계속실행
+        timer.schedule(addTask , 1000,1000);  // 5초후 실행하고 종료
+    }
+
+    public void Stop_Period() {
+        //Timer 작업 종료
+        if(timer != null) timer.cancel();
+    }
+
+    private Handler handler;
+    TimerTask addTask = new TimerTask() {
+        @Override
+        public void run() {
+            //주기적으로 실행할 작업 추가
+            if (flag) {
+                PostServer();
+                flag = false;
+                Stop_Period();
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +131,8 @@ public class route_register extends AppCompatActivity {
                         Log.d("test", end_lat + ", " + end_lon);
                         //assets에 있는 route.html을 로딩합니다.
                         mWebView.loadUrl("javascript:initTmap(" + start_lat + ", " + start_lon  + ", " + end_lat + ", " + end_lon  + ")");
-                        PostServer();
+                        Start_Period();
+
                     }
                 }
             }
@@ -108,11 +141,20 @@ public class route_register extends AppCompatActivity {
 
     private void PostServer() {
 
-        Call<route> call = MapRestful.postSafeLatlng(token, (ArrayList<LatLng>) result);
+        Log.d("@@@: ", String.valueOf(test));
+        Log.d("@@@: ", String.valueOf(result.size()));
+        for(int i = 0; i < result.size(); i++)
+        {
+            Log.d("@@@: ", "latlng " + result.get(i).getLat() + ", "+ result.get(i).getLng());
+        }
 
-        call.enqueue(new Callback<route>() {
+        Call<List<routes>> call = MapRestful.postSafeLatlng(token, result);
+
+
+
+        call.enqueue(new Callback<List<routes>>() {
             @Override
-            public void onResponse(Call<route> call, Response<route> response) {
+            public void onResponse(Call<List<routes>> call, Response<List<routes>> response) {
                 if (!response.isSuccessful()) {
                     Log.d("@@@: ", String.valueOf(response.code()));
                     return;
@@ -121,7 +163,7 @@ public class route_register extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<route> call, Throwable t) {
+            public void onFailure(Call<List<routes>> call, Throwable t) {
 
             }
 
@@ -140,8 +182,9 @@ public class route_register extends AppCompatActivity {
 
             for(int i=0; i<lat.length; i++)
             {
-                result.add(new LatLng(lat[i], lng[i]));
-                Log.d("test", "js test list latlng" + lat[i] + ", " + lng[i]);
+                result.add(new routes(lat[i], lng[i]));
+               // Log.d("test", "jstest" + lat[i] + ", " + lng[i]);
+                flag = true;
             }
         }
 

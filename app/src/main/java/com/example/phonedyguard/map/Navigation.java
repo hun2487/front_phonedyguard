@@ -6,6 +6,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,12 +29,19 @@ import com.example.phonedyguard.MainDisplay;
 import com.example.phonedyguard.R;
 import com.example.phonedyguard.User.UserInfo;
 import com.example.phonedyguard.sign_up.RegisterActivity;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -59,6 +67,12 @@ public class Navigation extends AppCompatActivity
     //시작 좌표
     double start_latitude;
     double start_longitude;
+
+    //선그리기 좌표
+
+    private PolylineOptions polylineOptions;
+    private ArrayList<LatLng> arrayPoints;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,16 +95,15 @@ public class Navigation extends AppCompatActivity
                 .build();
         MapRestful = retrofit.create(map_restful.class);
 
+       // addLine(new LatLng(start_latitude, start_longitude), new LatLng(35.1439156, 129.0105595));
     }
 
 
     private void createPost() {
 
-
         latlng_result latlngResult = new latlng_result(gpsTracker.getLatitude(), gpsTracker.getLongitude());
 
-
-        Call<latlng_result> call = MapRestful.createPost(token,latlngResult);
+        Call<latlng_result> call = MapRestful.createPost(token, latlngResult);
 
         call.enqueue(new Callback<latlng_result>() {
             @Override
@@ -134,6 +147,16 @@ public class Navigation extends AppCompatActivity
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
+
+        //this.init();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Stop_Period();
+        Log.d("Click", "onDestroy");
     }
 
     public void Start_Period() {
@@ -143,6 +166,7 @@ public class Navigation extends AppCompatActivity
         timer.schedule(addTask, 0, 5000); //// 0초후 첫실행, Interval분마다 계속실행
     }
 
+    
     public void Stop_Period() {
         //Timer 작업 종료
         if(timer != null) timer.cancel();
@@ -211,4 +235,8 @@ public class Navigation extends AppCompatActivity
     public void onMyLocationClick(@NonNull Location location) {
         Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG);
     }
-}
+
+
+
+
+}// Nav..class end

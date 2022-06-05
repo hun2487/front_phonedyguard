@@ -13,8 +13,6 @@ public class latlng_result {
     private double lng;
 
 
-
-
     public latlng_result(double LAT, double LAN)
     {
         this.lat = LAT;
