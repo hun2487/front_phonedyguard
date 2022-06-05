@@ -20,6 +20,9 @@ public interface map_restful {
     @GET("/maps/indices/") //
     Call<latlng_result> latlng_get(@Header("Authorization") String token);
 
+    @GET("/maps/routes") //
+    Call<safe_routes> get_saferoutes(@Header("Authorization") String token);
+
     @POST ("/maps/routes")
     Call<List<routes>> postSafeLatlng(@Header("Authorization") String token, @Body List<routes> post);
 

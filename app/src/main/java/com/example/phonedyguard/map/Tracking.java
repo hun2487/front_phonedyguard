@@ -68,7 +68,6 @@ public class Tracking extends AppCompatActivity
 
             public class mapThread extends Thread{
 
-
                 GoogleMap map = null;
 
                 Marker marker = null;
@@ -96,7 +95,7 @@ public class Tracking extends AppCompatActivity
                                             //DB에서 현재 위치 받아오기
                                             lat = result.getLat();
                                             lng = result.getLng();
-                                            Log.d("통123신 :", "latlng" + result.getLng() + result.getLng());
+                                            //Log.d("통123신 :", "latlng" + result.getLat() + result.getLng());
 
                                             // 지도에 마커를 표시한다.
                                             // 지도에 표시되어있는 마커를 모두 제거한다.
@@ -140,7 +139,7 @@ public class Tracking extends AppCompatActivity
 
                 }
 
-            }
+            }//Thread end
 
 
         }

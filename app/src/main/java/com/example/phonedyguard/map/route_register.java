@@ -39,17 +39,17 @@ public class route_register extends AppCompatActivity {
     private final String BASEURL = "http://3.36.109.233/"; //url
     String token = ((MainDisplay)MainDisplay.context_main).call_token;
     int test = 3;
-    boolean flag = false;
+
+    boolean flag = false;  //웹페이지 로드 완료 후 실행하기 위해
     private Timer timer;
 
 
 
     public void Start_Period() {
         timer = new Timer();
-        //timer.schedule(adTast , 5000);  // 5초후 실행하고 종료
-        //timer.schedule(adTast, 0, 300000); // 0초후 첫실행, 3초마다 계속실행
         timer.schedule(addTask , 1000,1000);  // 5초후 실행하고 종료
     }
+
 
     public void Stop_Period() {
         //Timer 작업 종료
@@ -61,6 +61,7 @@ public class route_register extends AppCompatActivity {
         @Override
         public void run() {
             //주기적으로 실행할 작업 추가
+            //웹페이지 로드가 완료되면 실행하고 종료
             if (flag) {
                 PostServer();
                 flag = false;
@@ -131,6 +132,8 @@ public class route_register extends AppCompatActivity {
                         Log.d("test", end_lat + ", " + end_lon);
                         //assets에 있는 route.html을 로딩합니다.
                         mWebView.loadUrl("javascript:initTmap(" + start_lat + ", " + start_lon  + ", " + end_lat + ", " + end_lon  + ")");
+
+                        //웹페이지 로드 완료 후 실행하기 위해
                         Start_Period();
 
                     }
@@ -183,7 +186,8 @@ public class route_register extends AppCompatActivity {
             for(int i=0; i<lat.length; i++)
             {
                 result.add(new routes(lat[i], lng[i]));
-               // Log.d("test", "jstest" + lat[i] + ", " + lng[i]);
+
+                //웹페이지 로드 완료 후 실행하기 위해
                 flag = true;
             }
         }

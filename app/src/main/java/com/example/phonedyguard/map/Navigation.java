@@ -1,18 +1,21 @@
 package com.example.phonedyguard.map;
 
 
-
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Address;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +43,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -54,39 +58,55 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Navigation extends AppCompatActivity
         implements GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
-        OnMapReadyCallback
-{
+        OnMapReadyCallback {
     private GpsTracker gpsTracker;
+    private GpsTracker gpsTracker2;
     private GoogleMap mMap;
     private final String BASEURL = "http://3.36.109.233/"; //url
     private map_restful MapRestful;
+    boolean webRoad = false;  //웹페이지 로드 완료 후 실행하기 위해
 
-    String token = ((MainDisplay)MainDisplay.context_main).call_token;
+    String token = ((MainDisplay) MainDisplay.context_main).call_token;
 
     Timer timer;
+
     //시작 좌표
     double start_latitude;
     double start_longitude;
 
     //선그리기 좌표
-
-    private PolylineOptions polylineOptions;
-    private ArrayList<LatLng> arrayPoints;
+    double start_lat = 35.1101192644269;
+    double start_lon = 128.9606150522155;
+    double end_lat = 35.11127299455579;
+    double end_lon = 128.96250151431215;
+    private WebView mWebView;
+    List<routes> result = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         gpsTracker = new GpsTracker(Navigation.this);
-
+        gpsTracker.getLocation();
         start_latitude = gpsTracker.getLatitude();
         start_longitude = gpsTracker.getLongitude();
 
         setContentView(R.layout.navigation);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.map1);
         mapFragment.getMapAsync(this);
+        Button button = findViewById(R.id.Nav);
+
+
+        //html 파일 실행
+        mWebView = (WebView) findViewById(R.id.webView);//xml 자바코드 연결
+        mWebView.getSettings().setJavaScriptEnabled(true);//자바스크립트 허용
+        //tmap 명의 JavascriptInterface 를 추가해 줍니다.
+        mWebView.addJavascriptInterface(new WebViewJavascriptBridge(), "Android_tmap");
+
+        mWebView.loadUrl("file:///android_asset/getroutes.html");
+
 
         //------------------------run
         Retrofit retrofit = new Retrofit.Builder()
@@ -95,38 +115,59 @@ public class Navigation extends AppCompatActivity
                 .build();
         MapRestful = retrofit.create(map_restful.class);
 
-       // addLine(new LatLng(start_latitude, start_longitude), new LatLng(35.1439156, 129.0105595));
-    }
 
-
-    private void createPost() {
-
-        latlng_result latlngResult = new latlng_result(gpsTracker.getLatitude(), gpsTracker.getLongitude());
-
-        Call<latlng_result> call = MapRestful.createPost(token, latlngResult);
-
-        call.enqueue(new Callback<latlng_result>() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<latlng_result> call, Response<latlng_result> response) {
-                if (!response.isSuccessful()) {
-                    Log.d("@@@: ", String.valueOf(response.code()));
-                    Log.d("@@@", "실패 lat : " + Double.toString(latlngResult.getLat()) +  " lng" + Double.toString(latlngResult.getLng()));
-                    return;
-                }
+            public void onClick(View v) {
 
-                latlng_result latlngResponse = response.body(); //post로 값 받아옴
+                Call<safe_routes> saferoute_call = MapRestful.get_saferoutes(token);
 
-                latlngResponse.getLat();
-                latlngResponse.getLng();
+                saferoute_call.enqueue(new Callback<safe_routes>() {
+                    @Override
+                    public void onResponse(Call<safe_routes> call, Response<safe_routes> response) {
+                        if (!response.isSuccessful()) {
+                            Log.d("@@@: ", String.valueOf(response.code()));
+                            return;
+                        }
 
-                Log.d("@@@", " 성공 lattsese : " + Double.toString(latlngResult.getLat()) +  " lng" + Double.toString(latlngResult.getLng()));
-            }
+                        safe_routes safeRoutes = response.body(); //post로 값 받아옴
 
-            @Override
-            public void onFailure(Call<latlng_result> call, Throwable t) {
-                Log.d("msg", t.getMessage()); //서버 통신 실패시
+                         start_lat = safeRoutes.getStart_lat();
+                         start_lon = safeRoutes.getStart_lon();
+                         end_lat = safeRoutes.getEnd_lat();
+                         end_lon = safeRoutes.getEnd_lng();
+
+                        Log.d("@@@", ".성공 startx " +safeRoutes.getStart_lat()+ "sy " + safeRoutes.getEnd_lng()
+                            + "e_x " + safeRoutes.getEnd_lat() + "e_y " + safeRoutes.getEnd_lng());
+                        mWebView.loadUrl("javascript:initTmap(" + start_lat + ", " + start_lon + ", " + end_lat + ", " + end_lon + ")");
+                        mapThread thread = new mapThread();
+                        thread.start();
+                    }
+
+                    @Override
+                    public void onFailure(Call<safe_routes> call, Throwable t) {
+                        Log.d("msg", t.getMessage()); //서버 통신 실패시
+                    }
+                });
             }
         });
+
+
+    }
+
+    class WebViewJavascriptBridge {
+        @JavascriptInterface
+        public void setTest(final double testx, final double testy) {
+            Log.d("test", "jstest" + testx + ", " + testy);
+        }
+
+        @JavascriptInterface
+        public void getLatLng(final double[] lat, final double[] lng) {
+            for (int i = 0; i < lat.length; i++) {
+                result.add(new routes(lat[i], lng[i]));
+                webRoad = true;
+            }
+        }
     }
 
 
@@ -143,14 +184,19 @@ public class Navigation extends AppCompatActivity
         } else {
             checkLocationPermissionWithRationale();
         }
-        Start_Period();
+        //Start_Period();
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
 
-        //this.init();
 
     }
+
+    void darwPath(LatLng startLatLng, LatLng endLatLng) {
+        PolylineOptions options = new PolylineOptions().add(startLatLng).add(endLatLng).width(5).color(Color.RED).geodesic(true);
+        mMap.addPolyline(options);
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -161,15 +207,13 @@ public class Navigation extends AppCompatActivity
 
     public void Start_Period() {
         timer = new Timer();
-        //timer.schedule(adTast , 5000);  // 5초후 실행하고 종료
-        //timer.schedule(adTast, 0, 300000); // 0초후 첫실행, 3초마다 계속실행
-        timer.schedule(addTask, 0, 5000); //// 0초후 첫실행, Interval분마다 계속실행
+        timer.schedule(addTask, 0, 1000); //// 0초후 첫실행, Interval분마다 계속실행
     }
 
-    
+
     public void Stop_Period() {
         //Timer 작업 종료
-        if(timer != null) timer.cancel();
+        if (timer != null) timer.cancel();
     }
 
 
@@ -179,6 +223,8 @@ public class Navigation extends AppCompatActivity
         public void run() {
             //주기적으로 실행할 작업 추가
             createPost();
+
+
         }
     };
 
@@ -237,6 +283,70 @@ public class Navigation extends AppCompatActivity
     }
 
 
+    //현재 위치 전송
+    private void createPost() {
+        gpsTracker.getLocation();
+
+        latlng_result latlngResult = new latlng_result(gpsTracker.getLatitude(), gpsTracker.getLongitude());
+
+        Call<latlng_result> call = MapRestful.createPost(token, latlngResult);
+
+        Log.d("@@@", " 현재좌표확인  : " + gpsTracker.getLatitude() + " , " + gpsTracker.getLongitude());
+        call.enqueue(new Callback<latlng_result>() {
+            @Override
+            public void onResponse(Call<latlng_result> call, Response<latlng_result> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("@@@: ", String.valueOf(response.code()));
+                    Log.d("@@@", "실패 lat : " + Double.toString(latlngResult.getLat()) + " lng" + Double.toString(latlngResult.getLng()));
+                    return;
+                }
+
+                latlng_result latlngResponse = response.body(); //post로 값 받아옴
+
+                latlngResponse.getLat();
+                latlngResponse.getLng();
+
+                Log.d("@@@", " 성공 lattsese : " + Double.toString(latlngResult.getLat()) + " lng" + Double.toString(latlngResult.getLng()));
+            }
+
+            @Override
+            public void onFailure(Call<latlng_result> call, Throwable t) {
+                Log.d("msg", t.getMessage()); //서버 통신 실패시
+            }
+        });
+    }
+
+    public class mapThread extends Thread {
+
+
+        public mapThread( ){ }
+        @Override
+        public void run() {
+
+            (Navigation.this).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    while (true) {
+                        if (webRoad) {
+                            for (int i = 0; i < result.size() - 1; i++) {
+                                Log.d("그리기", "" + result.get(i).getLat() + ", " + result.get(i).getLng());
+                                darwPath(new LatLng(result.get(i).getLat(), result.get(i).getLng()),
+                                        new LatLng(result.get(i + 1).getLat(), result.get(i + 1).getLng()));
+                            }
+                            webRoad = false;
+                            break;
+                        }
+                    }// while end
+
+                }
+            });
+
+
+        }//run end
+
+    }//Thread end
+
 
 
 }// Nav..class end
+
