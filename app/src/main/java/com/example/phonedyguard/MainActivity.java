@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
         Button signbt = (Button) findViewById(R.id.loginButton);
         Button signupbt = (Button) findViewById(R.id.signButton);
-        Button Nav = (Button) findViewById(R.id.Nav);
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -95,14 +94,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Nav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Navigation.class);
                 startActivity(intent);
             }
         });

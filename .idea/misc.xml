@@ -24,18 +24,21 @@
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/view_board.xml" value="0.2" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/menu/left.xml" value="0.11770833333333333" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/menu/menu.xml" value="0.11770833333333333" />
+        <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/drawable/border.xml" value="0.1395" />
+        <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/drawable/edit.xml" value="0.1395" />
+        <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1395" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/board_list.xml" value="0.1875" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/board_mod.xml" value="0.1875" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/board_select.xml" value="0.1875" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/board_write.xml" value="0.3605072463768116" />
-        <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/first.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/first.xml" value="0.25" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/guardmenu.xml" value="0.1875" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/login.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/maindisplay.xml" value="0.1875" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/navigation.xml" value="0.22" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/notification.xml" value="0.1875" />
-        <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/route_register.xml" value="0.1875" />
+        <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/route_register.xml" value="0.5" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/seperate.xml" value="0.1875" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/sign_up.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/layout/tracking.xml" value="0.1875" />
