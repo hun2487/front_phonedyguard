@@ -4,16 +4,23 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.phonedyguard.MainActivity;
 import com.example.phonedyguard.MainDisplay;
 import com.example.phonedyguard.R;
+import com.example.phonedyguard.sign_in.LoginActivity;
+import com.example.phonedyguard.sign_out.Logout_interface;
+import com.example.phonedyguard.sign_out.Logout_rtf;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,13 +31,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BoardRegister extends AppCompatActivity {
 
+    String token = ((MainDisplay) MainDisplay.context_main).call_token;
+    String accessToken = ((MainDisplay) MainDisplay.context_main).origin_token;
+    String refreshToken = ((MainDisplay) MainDisplay.context_main).call_refreshtoken;
+
     private final String BASEURL = "http://3.36.109.233/"; //url
     private EditText title_et, content_et;
 
-
-    String token = ((MainDisplay)MainDisplay.context_main).call_token;
-
     private registInterface registInterface;
+    private Logout_interface Logout_interface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +57,17 @@ public class BoardRegister extends AppCompatActivity {
                 .build();
 
         registInterface = retrofit.create(registInterface.class);
+        Logout_interface = retrofit.create(Logout_interface.class);
 
         boardwt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createPost();
+                if(title_et.getText().length() == 0){
+                    Toast.makeText(BoardRegister.this, "제목을 입력하세요!", Toast.LENGTH_SHORT).show();
+                }else if(content_et.getText().length() == 0){
+                    Toast.makeText(BoardRegister.this, "내용을 입력하세요!", Toast.LENGTH_SHORT).show();
+                }else{
+                createPost();}
             }
         });
     }
@@ -103,6 +118,36 @@ public class BoardRegister extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(ev);
+    }
+    public void deleteToken() {
+        Logout_rtf post = new Logout_rtf(accessToken, refreshToken);
+        Call<Logout_rtf> call = Logout_interface.deleteData(token, post);
+        call.enqueue(new Callback<Logout_rtf>() {
+            @Override
+            public void onResponse(Call<Logout_rtf> call, Response<Logout_rtf> response) {
+            }
+
+            @Override
+            public void onFailure(Call<Logout_rtf> call, Throwable t) {
+            }
+        });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.bt_logout:
+                deleteToken();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
