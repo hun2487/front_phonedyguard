@@ -5,6 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.phonedyguard.R;
 import com.example.phonedyguard.Util.RetrofitClient;
@@ -34,6 +38,8 @@ public class UserUpdate extends AppCompatActivity {
 
     private UserUpdate_interface userUpdate_interface;
 
+    Toolbar mytoolbar;
+
     // 성별 리턴 함수
     public String getSex(View view) {
         update_man = findViewById(R.id.update_man_radio);
@@ -52,6 +58,11 @@ public class UserUpdate extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userupdate);
+
+        mytoolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("개인정보변경"); //툴바 타이틀 이름
 
         update_name = findViewById(R.id.update_name);
         update_phone = findViewById(R.id.update_phone);
@@ -134,15 +145,21 @@ public class UserUpdate extends AppCompatActivity {
                 builder.show();
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu info){
+        MenuInflater menuInflater = getMenuInflater();
+        getMenuInflater().inflate(R.menu.info, info);
+        return true;
+    }
 
-        // 뒤로가기 버튼
-        update_back_btn = findViewById(R.id.update_back_btn);
-        update_back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UserUpdate.this, UserInfo.class);
-                startActivity(intent);
-            }
-        });
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

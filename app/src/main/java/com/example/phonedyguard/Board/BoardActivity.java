@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.phonedyguard.MainActivity;
 import com.example.phonedyguard.MainDisplay;
@@ -43,6 +45,8 @@ public class BoardActivity extends AppCompatActivity {
     private final String BASEURL = "http://3.36.109.233/"; //url
     private ListView boardlist;
 
+    Toolbar mytoolbar;
+
     ArrayList<com.example.phonedyguard.Board.boardlist> boardlists = new ArrayList<com.example.phonedyguard.Board.boardlist>();
     ArrayList<String> array = new ArrayList<>();
 
@@ -50,6 +54,12 @@ public class BoardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board_list);
+
+        mytoolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("게시판"); //툴바 타이틀 이름
+
 
         context_main = this;
 
@@ -134,6 +144,7 @@ public class BoardActivity extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
@@ -145,6 +156,9 @@ public class BoardActivity extends AppCompatActivity {
                 deleteToken();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                return true;
+            case android.R.id.home:
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

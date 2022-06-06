@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical">
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,26 +71,30 @@
     android:orientation="horizontal"
    >
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/b_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/edit"
+        android:textColor="@color/black"
         android:text="취소"
-        android:textColor="#FFFFFF" />
+        />
 
     <Button
         android:layout_width="199dp"
         android:layout_height="wrap_content"
         android:background="#00ff0000"
         />
-    <Button
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mod_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/edit"
+        android:textColor="@color/black"
         android:text="수정완료"
-        android:textColor="#FFFFFF" />
+         />
+
 </LinearLayout>
 
 </LinearLayout>

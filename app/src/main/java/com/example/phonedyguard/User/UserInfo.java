@@ -3,6 +3,9 @@ package com.example.phonedyguard.User;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.phonedyguard.MainActivity;
 import com.example.phonedyguard.MainDisplay;
@@ -30,7 +34,7 @@ public class UserInfo extends AppCompatActivity {
 
     private UserInfo_interface userInfo_interface;
     private TextView user_id, user_name, user_sex, user_phone;
-    private Button userinfo_back_btn, reset_btn, go_update_btn;
+    private Button reset_btn, go_update_btn;
 
 
     private String getEmail;
@@ -38,10 +42,17 @@ public class UserInfo extends AppCompatActivity {
     private String getSex;
     private String getPhone;
 
+    Toolbar mytoolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userinfo);
+
+        mytoolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("개인정보설정"); //툴바 타이틀 이름
 
         Utils.init(MyApp.getContext());
 
@@ -49,16 +60,6 @@ public class UserInfo extends AppCompatActivity {
         user_name = findViewById(R.id.tv_getName);
         user_sex = findViewById(R.id.tv_getSex);
         user_phone = findViewById(R.id.tv_getPhone);
-
-        // 뒤로가기 버튼 클릭 시
-        userinfo_back_btn = findViewById(R.id.userinfo_back_btn);
-        userinfo_back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UserInfo.this, MainDisplay.class);
-                startActivity(intent);
-            }
-        });
 
         // 새로고침 버튼
         reset_btn = findViewById(R.id.reset_btn);
@@ -128,5 +129,21 @@ public class UserInfo extends AppCompatActivity {
                         .show();
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu info){
+        MenuInflater menuInflater = getMenuInflater();
+        getMenuInflater().inflate(R.menu.info, info);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

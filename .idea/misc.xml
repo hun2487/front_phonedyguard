@@ -9,20 +9,30 @@
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/activity_main.xml" value="0.10648148148148148" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/board.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/board_list.xml" value="0.1125" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/board_list.xml" value="0.1" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/board_mod.xml" value="0.1" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/board_select.xml" value="0.2" />
-        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/board_write.xml" value="0.176" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/board_write.xml" value="0.13142857142857142" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/first.xml" value="0.1" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/guardmenu.xml" value="0.1" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/login.xml" value="0.1" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/maindisplay.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/menu.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/navigation.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/notification.xml" value="0.11979166666666667" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/route_register.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/seperate.xml" value="0.1" />
-        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/sign_up.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/sign_up.xml" value="0.1" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/switch_item.xml" value="0.11770833333333333" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/toolbar.xml" value="0.1" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/tracking.xml" value="0.1693840579710145" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/userinfo.xml" value="0.15" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/userupdate.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/view_board.xml" value="0.2" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/layout/wardmenu.xml" value="0.1693840579710145" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/menu/info.xml" value="0.1125" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/menu/left.xml" value="0.11770833333333333" />
+        <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/menu/logout.xml" value="0.1125" />
         <entry key="..\:/Users/hun24/Desktop/phonedyguard/front_phonedyguard/app/src/main/res/menu/menu.xml" value="0.11770833333333333" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/drawable/border.xml" value="0.1395" />
         <entry key="..\:/Users/sejin/Desktop/front_phonedyguard/app/src/main/res/drawable/edit.xml" value="0.1395" />

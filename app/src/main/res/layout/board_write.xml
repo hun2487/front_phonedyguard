@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical">
+
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,11 +45,11 @@
         android:hint="내용을 입력하세요."
         android:padding="16dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/reg_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="등록하기"
         android:background="@drawable/edit"
-        android:textColor="#FFFFFF" />
+        android:textColor="@color/black"/>
 </LinearLayout>

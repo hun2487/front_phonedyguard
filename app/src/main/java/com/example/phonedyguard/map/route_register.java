@@ -1,11 +1,15 @@
 package com.example.phonedyguard.map;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
@@ -14,9 +18,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.example.phonedyguard.MainActivity;
 import com.example.phonedyguard.MainDisplay;
 import com.example.phonedyguard.R;
+import com.example.phonedyguard.sign_out.Logout_interface;
+import com.example.phonedyguard.sign_out.Logout_rtf;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
@@ -38,12 +46,17 @@ public class route_register extends AppCompatActivity {
     private map_restful MapRestful;
     private final String BASEURL = "http://3.36.109.233/"; //url
     String token = ((MainDisplay)MainDisplay.context_main).call_token;
+    String accessToken = ((MainDisplay) MainDisplay.context_main).origin_token;
+    String refreshToken = ((MainDisplay) MainDisplay.context_main).call_refreshtoken;
+
+    private Logout_interface Logout_interface;
+
     int test = 3;
 
     boolean flag = false;  //웹페이지 로드 완료 후 실행하기 위해
     private Timer timer;
 
-
+    Toolbar mytoolbar;
 
     public void Start_Period() {
         timer = new Timer();
@@ -79,7 +92,10 @@ public class route_register extends AppCompatActivity {
         //    INTERNET : 구글서버에 접근하기위해서 필요함
         Button safeload_btn = (Button) findViewById(R.id.safeload_btn);
 
-
+        mytoolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("안심경로설정"); //툴바 타이틀 이름
 
         final EditText end_edit = (EditText) findViewById(R.id.end_edittext);
         final EditText start_edit = (EditText) findViewById(R.id.start_edittext);
@@ -99,7 +115,7 @@ public class route_register extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         MapRestful = retrofit.create(map_restful.class);
-
+        Logout_interface = retrofit.create(Logout_interface.class);
 
 
         safeload_btn.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +207,41 @@ public class route_register extends AppCompatActivity {
                 flag = true;
             }
         }
+    }
 
+    public void deleteToken() {
 
+        Logout_rtf post = new Logout_rtf(accessToken, refreshToken);
+        Call<Logout_rtf> call = Logout_interface.deleteData(token, post);
+        call.enqueue(new Callback<Logout_rtf>() {
+            @Override
+            public void onResponse(Call<Logout_rtf> call, Response<Logout_rtf> response) {
+            }
+
+            @Override
+            public void onFailure(Call<Logout_rtf> call, Throwable t) {
+            }
+        });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.bt_logout:
+                deleteToken();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                return true;
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

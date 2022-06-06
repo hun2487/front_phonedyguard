@@ -4,6 +4,10 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
@@ -11,12 +15,12 @@
         android:layout_weight="1"
         />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/reg_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edit"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/black"
         android:text="글쓰기"
         />
 

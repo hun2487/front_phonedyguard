@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.phonedyguard.MainActivity;
 import com.example.phonedyguard.MainDisplay;
@@ -36,27 +38,25 @@ public class Boardselect extends AppCompatActivity {
     private selectInterface selectInterface;
     private Logout_interface Logout_interface;
 
+    Toolbar mytoolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board_select);
 
-        Button backbt = (Button) findViewById(R.id.back_button);
+        mytoolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("게시글"); //툴바 타이틀 이름
+
         Button mod_bt = (Button) findViewById(R.id.mod_button);
         Button del_bt = (Button) findViewById(R.id.del_button);
 
         title_et = findViewById(R.id.title_et);
         content_et = findViewById(R.id.content_et);
         id_et = findViewById(R.id.id_et);
-
-        backbt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
-                startActivity(intent);
-            }
-        });
 
         mod_bt.setOnClickListener(new View.OnClickListener() {  //수정하기
             @Override
@@ -119,7 +119,6 @@ public class Boardselect extends AppCompatActivity {
     }
 
     private void deleteBoard(){
-        //deleteBoard del = new deleteBoard(num);
         Call<Void> call = selectInterface.deleteData(token,num);
         call.enqueue(new Callback<Void>()  {
             @Override
@@ -148,6 +147,7 @@ public class Boardselect extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
@@ -159,6 +159,9 @@ public class Boardselect extends AppCompatActivity {
                 deleteToken();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                return true;
+            case android.R.id.home:
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

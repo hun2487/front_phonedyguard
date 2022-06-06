@@ -207,9 +207,8 @@ public class Navigation extends AppCompatActivity
 
     public void Start_Period() {
         timer = new Timer();
-        timer.schedule(addTask, 0, 1000); //// 0초후 첫실행, Interval분마다 계속실행
+        timer.schedule(addTask, 0, 10000); //// 0초후 첫실행, Interval분마다 계속실행
     }
-
 
     public void Stop_Period() {
         //Timer 작업 종료

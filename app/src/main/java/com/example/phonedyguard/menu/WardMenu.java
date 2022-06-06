@@ -3,12 +3,14 @@ package com.example.phonedyguard.menu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.phonedyguard.Board.BoardActivity;
 import com.example.phonedyguard.MainActivity;
@@ -36,10 +38,17 @@ public class WardMenu extends AppCompatActivity {
 
     Button board, see_safe;
 
+    Toolbar mytoolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wardmenu);
+
+        mytoolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("피보호자"); //툴바 타이틀 이름
 
         board = findViewById(R.id.bt_board);
         see_safe = findViewById(R.id.bt_seesafe);
@@ -83,6 +92,7 @@ public class WardMenu extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
@@ -94,6 +104,9 @@ public class WardMenu extends AppCompatActivity {
                 deleteToken();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                return true;
+            case android.R.id.home:
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

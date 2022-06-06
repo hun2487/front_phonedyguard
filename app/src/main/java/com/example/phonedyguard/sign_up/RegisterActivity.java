@@ -4,6 +4,9 @@ package com.example.phonedyguard.sign_up;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.phonedyguard.MainActivity;
 import com.example.phonedyguard.R;
@@ -32,6 +36,8 @@ public class RegisterActivity extends AppCompatActivity {
     private AlertDialog dialog;
 
     private Register_interface register_interface;
+
+    Toolbar mytoolbar;
 
     // 성별 리턴 함수
     public String getSex(View view) {
@@ -88,6 +94,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up); // 회원가입 화면
 
+        mytoolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("회원가입"); //툴바 타이틀 이름
+
+
         // 아이디 지정 (editText)
         userid = findViewById(R.id.userid);
         userpassword = findViewById(R.id.userpassword);
@@ -95,15 +107,6 @@ public class RegisterActivity extends AppCompatActivity {
         userphonenumber = findViewById(R.id.userphonenumber);
         userpwck = findViewById(R.id.pwck);
 
-        // 뒤로가기 버튼 클릭 시
-        sign_up_back_btn = findViewById(R.id.sign_up_back_btn);
-        sign_up_back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
 
         // 회원가입 버튼 클릭 시 수행
         sign_up_btn = findViewById(R.id.sign_up_btn); // 회원가입
@@ -147,5 +150,21 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu info){
+        MenuInflater menuInflater = getMenuInflater();
+        getMenuInflater().inflate(R.menu.info, info);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

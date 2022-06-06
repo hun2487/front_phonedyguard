@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.phonedyguard.MainActivity;
 import com.example.phonedyguard.MainDisplay;
@@ -39,11 +41,18 @@ public class BoardMod  extends AppCompatActivity {
     private selectInterface selectInterface;
     private Logout_interface Logout_interface;
 
+    Toolbar mytoolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board_mod);
+
+        mytoolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("게시글 수정"); //툴바 타이틀 이름
 
         Button back_bt = (Button) findViewById(R.id.b_button);
         Button mod_bt = (Button) findViewById(R.id.mod_button);
@@ -162,6 +171,7 @@ public class BoardMod  extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
@@ -173,6 +183,9 @@ public class BoardMod  extends AppCompatActivity {
                 deleteToken();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                return true;
+            case android.R.id.home:
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

@@ -138,8 +138,5 @@ public class Tracking extends AppCompatActivity
                     }
 
                 }
-
             }//Thread end
-
-
         }

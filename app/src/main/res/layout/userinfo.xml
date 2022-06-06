@@ -6,39 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/border"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/userinfo_back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:layout_marginLeft="5dp"
-            android:text="뒤로" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="0"
-            android:gravity="center"
-            android:text="개인정보 조회"
-            android:textColor="@color/black"
-            android:textSize="30dp" />
-
-        <Button
-            android:id="@+id/go_updateInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="5dp"
-            android:text="정보수정" />
 
     </LinearLayout>
 
@@ -171,12 +148,37 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/reset_btn"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="새로고침" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/go_updateInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0"
+                android:background="@drawable/edit"
+                android:textColor="@color/black"
+                android:text="정보수정" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="20dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/reset_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/edit"
+                android:textColor="@color/black"
+                android:text="새로고침" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

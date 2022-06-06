@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.phonedyguard.MainActivity;
 import com.example.phonedyguard.MainDisplay;
@@ -41,10 +43,17 @@ public class BoardRegister extends AppCompatActivity {
     private registInterface registInterface;
     private Logout_interface Logout_interface;
 
+    Toolbar mytoolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board_write);
+
+        mytoolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("게시글 등록"); //툴바 타이틀 이름
 
         title_et = findViewById(R.id.title_et);
         content_et = findViewById(R.id.content_et);
@@ -132,8 +141,10 @@ public class BoardRegister extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
@@ -145,6 +156,9 @@ public class BoardRegister extends AppCompatActivity {
                 deleteToken();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                return true;
+            case android.R.id.home:
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
