@@ -60,7 +60,6 @@ public class Navigation extends AppCompatActivity
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback {
     private GpsTracker gpsTracker;
-    private GpsTracker gpsTracker2;
     private GoogleMap mMap;
     private final String BASEURL = "http://3.36.109.233/"; //url
     private map_restful MapRestful;
@@ -184,7 +183,7 @@ public class Navigation extends AppCompatActivity
         } else {
             checkLocationPermissionWithRationale();
         }
-        //Start_Period();
+        Start_Period();
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
@@ -222,8 +221,6 @@ public class Navigation extends AppCompatActivity
         public void run() {
             //주기적으로 실행할 작업 추가
             createPost();
-
-
         }
     };
 
@@ -316,7 +313,6 @@ public class Navigation extends AppCompatActivity
     }
 
     public class mapThread extends Thread {
-
 
         public mapThread( ){ }
         @Override

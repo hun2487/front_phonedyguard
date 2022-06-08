@@ -35,6 +35,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_gravity="center"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -60,6 +61,7 @@
                 android:id="@+id/editTextTextPersonName"
                 android:layout_width="290dp"
                 android:layout_height="wrap_content"
+
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:minHeight="48dp" />
@@ -69,6 +71,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="58dp"
+        android:layout_gravity="center"
         android:orientation="horizontal">
 
         <LinearLayout

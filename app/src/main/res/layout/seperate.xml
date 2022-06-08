@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <include
         layout="@layout/toolbar"
@@ -11,8 +11,10 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="158dp"
-        android:layout_height="152dp"
+        android:layout_marginTop="250dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginBottom="264dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,23 +25,24 @@
 
             android:id="@+id/guardian"
             android:layout_width="164dp"
-            android:layout_height="187dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/edit"
-            android:textColor="@color/black"
-            android:text="보호자" />
+            android:text="보호자"
+            android:textColor="@color/black" />
 
         <androidx.appcompat.widget.AppCompatButton
 
             android:id="@+id/ward"
             android:layout_width="164dp"
-            android:layout_height="187dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/edit"
-            android:textColor="@color/black"
-            android:text="피보호자" />
+            android:text="피보호자"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

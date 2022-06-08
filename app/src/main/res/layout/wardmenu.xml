@@ -31,12 +31,12 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bt_seesafe"
-            android:layout_width="270dp"
+            android:layout_width="266dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:background="@drawable/edit"
-            android:text="안심경로 확인"
+            android:text="안심경로 안내"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
